@@ -39,7 +39,7 @@ if(isset($_POST['deposit'])){
 <body>
 <center>
     <div class="payment-title">
-        <h3>SMART ATM</h3><br>
+        <h3>SMART ATM</h3><hr><br>
         <h1>Account Information</h1>
         <p><?php echo $_SESSION['email']?></p>
         <h4>Balance: <span style="background-color:grey;color:white;border-radius:5px;padding:5px;"> KES <?php
@@ -61,7 +61,7 @@ if(isset($_POST['deposit'])){
             <br>
             <button style="width:100px;height:45px;background-color:rgb(17, 117, 156);border:none;color:white;" type="submit" name="deposit">Deposit</button> 
         </form>
-        <h3><a href="../logout.php" style="color:black;">Logout</a></h3>
+        <h4><a href="../logout.php" style="color:black;">Logout</a></h4>
 </div>
     </div>
     </center>
