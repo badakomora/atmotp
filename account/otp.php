@@ -2,6 +2,8 @@
 session_start(); 
 include '../config.php';
 if(isset($_POST['verify'])) {
+    $accno = $_GET['accno'];
+    if($_GET['accno'] == $_SESSION['accountno']){
     $otp = $_POST['otpno'];
     if (password_verify( $otp, $_GET['otp'])) {
 
@@ -21,10 +23,15 @@ if(isset($_POST['verify'])) {
             header("refresh: 0, ./");
         }
     }else{
-        $msg = "Please provide the correct otp to complete this transaction or account will be De-activated Completely!";
+        $msg = "Please provide the correct otp to complete this transaction!";
         echo "<script type='text/javascript'>alert('$msg');</script>";
-        header("refresh: 0, otp.php");
+        header("refresh: 0, ./");
     }
+}else{
+        $msg = "Please provide your correct account number to complete this transaction!";
+        echo "<script type='text/javascript'>alert('$msg');</script>";
+        header("refresh: 0, ./");
+}
 }
 ?>
 
@@ -37,19 +44,24 @@ if(isset($_POST['verify'])) {
     <title>Document</title>
 </head>
 <body>
+<center>
 <div class="form-container">
+    <br><br>
         <form action="" method="post">
         <div class="field-container">
-            <label>OTP</label>
-            <input placeholder="enter the otp sent to your phone" name="otpno">
+            <label>Provide OTP to complete transaction</label><br>
+            <hr width="50%">
+            <input placeholder=" Enter the otp sent to your phone" style="width:340px;height:45px;" name="otpno" required>
         </div>
+        <br>
         <div class="field-container">   
         </div>
-        <hr>
         <div class="field-container">
             <button style="width:350px;height:45px;background-color:grey;border:none;color:white;" type="submit" name="verify">Verify</button>
         </div>
         </form>
-    </div>
+        <p><a href="./">Go back to dashboard</a></p>
+</div>
+</center>
 </body>
 </html>

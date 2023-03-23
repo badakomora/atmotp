@@ -39,6 +39,7 @@ if(isset($_POST['deposit'])){
 <body>
 <center>
     <div class="payment-title">
+        <h3>SMART ATM</h3><br>
         <h1>Account Information</h1>
         <p><?php echo $_SESSION['email']?></p>
         <h4>Balance: <span style="background-color:grey;color:white;border-radius:5px;padding:5px;"> KES <?php
@@ -55,7 +56,7 @@ if(isset($_POST['deposit'])){
         <div style="display:block;">
         <form action="" method="post">
             <div class="field-container">
-                <input type="text" placeholder="enter amount to deposit" name="amount" style="width: 300px;">
+                <input type="text" placeholder="Enter amount to deposit" name="amount" style="width: 300px;" required>
             </div>
             <br>
             <button style="width:100px;height:45px;background-color:rgb(17, 117, 156);border:none;color:white;" type="submit" name="deposit">Deposit</button> 
@@ -136,7 +137,7 @@ if(isset($_POST['deposit'])){
         <form action="../home/index.php" method="post">
         <div class="field-container">
             <label>Phone No.</label>
-            <input type="text" placeholder="enter phone" name="phone" maxlength="20">
+            <input type="text" placeholder="enter phone" name="phone" maxlength="20" required>
         </div>
         <div class="field-container">
             <label >Account No.</label>
@@ -144,7 +145,7 @@ if(isset($_POST['deposit'])){
         </div>
         <div class="field-container">
             <label>Amount to Withdraw</label>
-            <input type="text" placeholder="enter amount to withdraw" name="amount">
+            <input type="text" placeholder="enter amount to withdraw" name="amount" required>
         </div>
         <div class="field-container">   
         </div>

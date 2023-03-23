@@ -70,14 +70,14 @@ if (isset($_POST['login'])) {
   <div class="user_options-container">
     <div class="user_options-text">
       <div class="user_options-unregistered">
-        <h2 class="user_unregistered-title">Don't have an account?</h2>
-        <p class="user_unregistered-text">Banjo tote bag bicycle rights, High Life sartorial cray craft beer whatever street art fap.</p>
+        <h2 class="user_unregistered-title">SMART ATM, for you.</h2>
+        <p class="user_unregistered-text">SmartATM allows a variety of transactions process and solutions such as deposits, withdrawals, and otp verification for your money safety. Don't have an account?</p>
         <button class="user_unregistered-signup" id="signup-button">Sign up</button>
       </div>
 
       <div class="user_options-registered">
-        <h2 class="user_registered-title">Have an account?</h2>
-        <p class="user_registered-text">Banjo tote bag bicycle rights, High Life sartorial cray craft beer whatever street art fap.</p>
+        <h2 class="user_registered-title">Choose SMART ATM.</h2>
+        <p class="user_registered-text">SmartATM is the place to be. Create your account for free and have your mobile money secure. Have an account?</p>
         <button class="user_registered-login" id="login-button">Login</button>
       </div>
     </div>

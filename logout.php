@@ -5,4 +5,3 @@ session_destroy();
 $msg = "Sign out action Successful!";
 echo "<script type='text/javascript'>alert('$msg');</script>";
 header("refresh: 0, ./");
-?>
