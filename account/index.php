@@ -1,175 +1,488 @@
-<?php 
-session_start(); 
+<?php
+session_start();
 if(!isset($_SESSION['email'])) {
 $msg = "Please Sign In Correctly or your Account will be De-activated Completely!";
 echo "<script type='text/javascript'>alert('$msg');</script>";
 header("refresh: 0, ../");
 }
-include '../config.php';
-if(isset($_POST['deposit'])){
-    $query=mysqli_query($con, "SELECT * FROM bal WHERE user_id = '". $_SESSION['user_id']."'");
-    $nums=mysqli_fetch_assoc($query);
-    $amount = $_POST['amount'];
-    $curBal = $nums['amount'];
-    $num = mysqli_num_rows($query);
-
-    if ($num >= 1) {
-        mysqli_query($con, "UPDATE bal SET amount = amount + $amount WHERE user_id = '" . $_SESSION['user_id'] . "' ");
-        $msg = "You are about to deposit $amount Ksh to your account.";
-        echo "<script type='text/javascript'>alert('$msg');</script>";
-        header("refresh: 0,./");
-    }else{
-        mysqli_query($con, "INSERT INTO bal(user_id, amount) VALUES('" . $_SESSION['user_id'] . "', $amount)");
-        $msg = "You are about to deposit $amount Ksh to your account.";
-        echo "<script type='text/javascript'>alert('$msg');</script>";
-        header("refresh: 0,./");
-    }
-
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+    <title>Dashboard</title>
 </head>
-<body>
-<center>
-    <div class="payment-title">
-        <h3>SMART ATM</h3><hr><br>
-        <h1>Account Information</h1>
-        <p><?php echo $_SESSION['email']?></p>
-        <h4>Balance: <span style="background-color:grey;color:white;border-radius:5px;padding:5px;"> KES <?php
-                            $query = mysqli_query($con, "SELECT * FROM bal WHERE user_id = '" . $_SESSION['user_id'] . "' ");
-                            $num = mysqli_num_rows($query);
-                            if ($num >= 1) {
-                                $row = mysqli_fetch_assoc($query);
-                                $balance = $row['amount'];
-                                echo $balance;
-                            } else {
-                                echo 0;
-                            }
-                            ?></span></h4>
-        <div style="display:block;">
-        <form action="" method="post">
-            <div class="field-container">
-                <input type="text" placeholder="Enter amount to deposit" name="amount" style="width: 300px;" required>
-            </div>
-            <br>
-            <button style="width:100px;height:45px;background-color:rgb(17, 117, 156);border:none;color:white;" type="submit" name="deposit">Deposit</button> 
-        </form>
-        <h4><a href="../logout.php" style="color:black;">Logout</a></h4>
-</div>
-    </div>
-    </center>
-    <div class="container preload">
-        <div class="creditcard">
-            <div class="front">
-                <div id="ccsingle"></div>
-                <svg version="1.1" id="cardfront" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                    x="0px" y="0px" viewBox="0 0 750 471" style="enable-background:new 0 0 750 471;" xml:space="preserve">
-                    <g id="Front">
-                        <g id="CardBackground">
-                            <g id="Page-1_1_">
-                                <g id="amex_1_">
-                                    <path id="Rectangle-1_1_" class="lightcolor grey" d="M40,0h670c22.1,0,40,17.9,40,40v391c0,22.1-17.9,40-40,40H40c-22.1,0-40-17.9-40-40V40
-                            C0,17.9,17.9,0,40,0z" />
-                                </g>
-                            </g>
-                            <path class="darkcolor greydark" d="M750,431V193.2c-217.6-57.5-556.4-13.5-750,24.9V431c0,22.1,17.9,40,40,40h670C732.1,471,750,453.1,750,431z" />
-                        </g>
 
-                        <text transform="matrix(1 0 0 1 60.106 295.0121)" id="accno" class="st2 st3 st4"></text>
-                        <text transform="matrix(1 0 0 1 54.1064 428.1723)" id="svgname" class="st2 st5 st6"><?php echo $_SESSION['fullname']; ?></text>
-                        <text transform="matrix(1 0 0 1 54.1074 389.8793)" class="st7 st5 st8">cardholder name</text>
-                        <text transform="matrix(1 0 0 1 479.7754 388.8793)" class="st7 st5 st8">expiration</text>
-                        <text transform="matrix(1 0 0 1 65.1054 241.5)" class="st7 st5 st8">card number</text>
-                        <g>
-                            <text transform="matrix(1 0 0 1 574.4219 433.8095)" id="svgexpire" class="st2 st5 st9">01/25</text>
-                            <text transform="matrix(1 0 0 1 479.3848 417.0097)" class="st2 st10 st11">VALID</text>
-                            <text transform="matrix(1 0 0 1 479.3848 435.6762)" class="st2 st10 st11">THRU</text>
-                            <polygon class="st2" points="554.5,421 540.4,414.2 540.4,427.9 		" />
-                        </g>
-                        <g id="cchip">
-                            <g>
-                                <path class="st2" d="M168.1,143.6H82.9c-10.2,0-18.5-8.3-18.5-18.5V74.9c0-10.2,8.3-18.5,18.5-18.5h85.3
-                        c10.2,0,18.5,8.3,18.5,18.5v50.2C186.6,135.3,178.3,143.6,168.1,143.6z" />
-                            </g>
-                            <g>
-                                <g>
-                                    <rect x="82" y="70" class="st12" width="1.5" height="60" />
-                                </g>
-                                <g>
-                                    <rect x="167.4" y="70" class="st12" width="1.5" height="60" />
-                                </g>
-                                <g>
-                                    <path class="st12" d="M125.5,130.8c-10.2,0-18.5-8.3-18.5-18.5c0-4.6,1.7-8.9,4.7-12.3c-3-3.4-4.7-7.7-4.7-12.3
-                            c0-10.2,8.3-18.5,18.5-18.5s18.5,8.3,18.5,18.5c0,4.6-1.7,8.9-4.7,12.3c3,3.4,4.7,7.7,4.7,12.3
-                            C143.9,122.5,135.7,130.8,125.5,130.8z M125.5,70.8c-9.3,0-16.9,7.6-16.9,16.9c0,4.4,1.7,8.6,4.8,11.8l0.5,0.5l-0.5,0.5
-                            c-3.1,3.2-4.8,7.4-4.8,11.8c0,9.3,7.6,16.9,16.9,16.9s16.9-7.6,16.9-16.9c0-4.4-1.7-8.6-4.8-11.8l-0.5-0.5l0.5-0.5
-                            c3.1-3.2,4.8-7.4,4.8-11.8C142.4,78.4,134.8,70.8,125.5,70.8z" />
-                                </g>
-                                <g>
-                                    <rect x="82.8" y="82.1" class="st12" width="25.8" height="1.5" />
-                                </g>
-                                <g>
-                                    <rect x="82.8" y="117.9" class="st12" width="26.1" height="1.5" />
-                                </g>
-                                <g>
-                                    <rect x="142.4" y="82.1" class="st12" width="25.8" height="1.5" />
-                                </g>
-                                <g>
-                                    <rect x="142" y="117.9" class="st12" width="26.2" height="1.5" />
-                                </g>
-                            </g>
-                        </g>
-                    </g>
-                    <g id="Back">
-                    </g>
-                </svg>
+<body>
+    <!-- Dashboard -->
+    <div class="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
+        <!-- Vertical Navbar -->
+        <nav class="navbar show navbar-vertical h-lg-screen navbar-expand-lg px-0 py-3 navbar-light bg-white border-bottom border-bottom-lg-0 border-end-lg" id="navbarVertical">
+            <div class="container-fluid">
+                <!-- Toggler -->
+                <button class="navbar-toggler ms-n2" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarCollapse" aria-controls="sidebarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- Brand -->
+                <a class="navbar-brand py-lg-2 mb-lg-5 px-lg-6 me-0" href="#">
+                    <!-- <img src="#" alt="..."> -->
+                </a>
+                <!-- Collapse -->
+                <div class="collapse navbar-collapse" id="sidebarCollapse">
+                    <!-- Navigation -->
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="./?p=Dashboard">
+                                <i class="bi bi-house"></i> Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./?p=withdrawals">
+                                <i class="bi bi-minecart-loaded"></i>Withdrawals
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./?p=Deposits">
+                                <i class="bi bi-chat"></i> Deposits
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- Divider -->
+                    <hr class="navbar-divider my-5 opacity-20">
+                    <!-- Navigation -->
+                    <div class="mt-auto"></div>
+                    <!-- User (md) -->
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <li class="nav-item">
+                            <a class="nav-link" href="#" class="dropdown-item" type="button" data-toggle="modal" data-target="#account">
+                                <i class="bi bi-person-square"></i> Account
+                            </a>
+                            </li>
+                            <a class="nav-link" href="../logout.php">
+                                <i class="bi bi-box-arrow-left"></i> Logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
+        </nav>
+        <!-- Main content -->
+        <div class="h-screen flex-grow-1 overflow-y-lg-auto">
+            <!-- Header -->
+            <header class="bg-surface-primary border-bottom pt-6">
+                <div class="container-fluid">
+                    <div class="mb-npx">
+                        <div class="row align-items-center">
+                            <div class="col-sm-6 col-12 mb-4 mb-sm-0">
+                                <!-- Title -->
+                                <?php if (isset($_GET['p'])) {
+                                    if ($_GET['p'] == 'withdrawals') { ?>
+                                        <h1 class="h2 mb-0 ls-tight">withdrawals</h1>
+                                    <?php } elseif ($_GET['p'] == 'Deposits') { ?>
+                                        <h1 class="h2 mb-0 ls-tight">Deposits</h1>
+                                    <?php  } elseif ($_GET['p'] == 'Dashboard') { ?>
+                                       <h1 class="h2 mb-0 ls-tight">Dashboard</h1>
+                               <?php }
+                                } else { ?>
+                                    <h1 class="h2 mb-0 ls-tight">Dashboard</h1>
+                                <?php } ?>
+                            </div>
+                            <!-- Actions -->
+                            <div class="col-sm-6 col-12 text-sm-end">
+                                <div class="mx-n1">
+                                    <a href="#" class="btn-primary d-inline-flex btn-sm mx-1" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="pe-2">
+                                            <i class="bi bi-plus"></i>
+                                        </span>
+                                        <span>Transact</span>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <a class="dropdown-item" href="#" type="button" data-toggle="modal" data-target="#safari">Deposit</a>
+                                            <a class="dropdown-item" href="#" type="button" data-toggle="modal" data-target="#itinerary">Withdraw</a>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Nav -->
+                        <ul class="nav nav-tabs mt-4 overflow-x border-0">
+                            <li class="nav-item ">
+                                <a href="./?all=<?php echo $_GET['p'];?>" class="nav-link active">All</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
+            <!-- Main -->
+            <main class="py-6 bg-surface-secondary">
+                <div class="container-fluid">
+                    <!-- Card stats -->
+                    <div class="row g-6 mb-6">
+                        <div class="col-xl-3 col-sm-6 col-12">
+                            <div class="card shadow border-0">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <span class="h6 font-semibold text-muted text-sm d-block mb-2">Withdrawals</span>
+                                            <span class="h3 font-bold mb-0"><?php
+                                                                            include '../config.php';
+                                                                            $bookings = mysqli_query($con, "SELECT count(*) as count FROM withdrawals");
+                                                                            while ($bookingsrows = mysqli_fetch_array($bookings)) {
+                                                                                echo $bookingsrows['count'];
+                                                                            }
+                                                                            ?></span>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="icon icon-shape bg-tertiary text-white text-lg rounded-circle">
+                                                <i class="bi bi-minecart-loaded"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 mb-0 text-sm">
+                                        <span class="text-nowrap text-xs text-muted">Withdrawal transactions</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-6 col-12">
+                            <div class="card shadow border-0">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <span class="h6 font-semibold text-muted text-sm d-block mb-2">Deposits</span>
+                                            <span class="h3 font-bold mb-0"><?php
+                                                                            include '../config.php';
+                                                                            $bookings = mysqli_query($con, "SELECT count(*) as count FROM deposits");
+                                                                            while ($bookingsrows = mysqli_fetch_array($bookings)) {
+                                                                                echo $bookingsrows['count'];
+                                                                            }
+                                                                            ?></span>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="icon icon-shape bg-primary text-white text-lg rounded-circle">
+                                                <i class="bi bi-people"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 mb-0 text-sm">
+                                        <span class="text-nowrap text-xs text-muted">Deposits transactions</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </div>
+
+
+
+
+                    <?php 
+                    // include '../includes/create.php'; 
+                    ?>
+
+
+
+
+                    <div class="card shadow border-0 mb-7">
+                        <div class="card-header">
+                            <?php if (isset($_GET['p']) and $_GET['p'] == 'Dashboard') { ?>
+                                <h5 class="mb-0">Dashboard</h5>
+                            <?php } elseif (isset($_GET['p']) and $_GET['p'] == 'withdrawals') { ?>
+                                <h5 class="mb-0">Withdrawals</h5>
+                            <?php } elseif (isset($_GET['p']) and $_GET['p'] == 'Deposits') { ?>
+                                <h5 class="mb-0">Deposits</h5>
+                            <?php } else { ?>
+                                <h5 class="mb-0">Dashboard</h5>
+                            <?php } ?>
+                        </div>
+
+                            <div class="table-responsive">
+                                <table class="table table-hover table-nowrap">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Amount</th>
+                                            <th scope="col">Date of transaction</th>
+                                            <th scope="col">Type of transaction</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+
+
+
+
+                                            <?php if (isset($_GET['p']) and $_GET['p'] == 'Dashboard') { 
+                                            
+                                            include '../config.php';
+                                            $bookings = mysqli_query($con, "SELECT users.id, users.email, withdrawals.user_id, withdrawals.amount, withdrawals.withdrawal_time as time, withdrawals.transaction
+                                            FROM users
+                                            INNER JOIN withdrawals ON withdrawals.user_id = users.id 
+                                            WHERE withdrawals.user_id = '".$_SESSION['user_id']."' 
+                                            
+                                            UNION ALL
+                                            
+                                            SELECT users.id, users.email, deposits.user_id, deposits.amount, deposits.deposit_time as time, deposits.transaction 
+                                            FROM deposits 
+                                            INNER JOIN users ON deposits.user_id = users.id 
+                                            WHERE deposits.user_id = '".$_SESSION['user_id']."'");
+                                            while ($bookingsrows = mysqli_fetch_array($bookings)) {
+                                            ?>    
+                                            
+                                            
+                                    
+
+
+                                                
+                                            
+                                            
+                                            <tr>
+                                                <td>
+                                                    <i class="bi bi-person"></i>
+                                                    <a class="text-heading font-semibold" href="#">
+                                                        <?php echo $bookingsrows['email']; ?>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <i class="bi bi-person"></i>
+                                                    <a class="text-heading font-semibold" href="#">
+                                                        <?php echo $bookingsrows['amount']; ?>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <i class="bi bi-envelope"></i>
+                                                    <a class="text-heading font-semibold" href="#">
+                                                        <?php echo $bookingsrows['time']; ?>.
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <i class="bi bi-envelope"></i>
+                                                    <a class="text-heading font-semibold" href="#">
+                                                        <?php echo $bookingsrows['transaction']; ?>.
+                                                    </a>
+                                                </td>
+                                                <td class="text-end">
+                                                    <a href="item.php?p=users&bid=<?php echo $bookingsrows['id']; ?>&userid=<?php echo $bookingsrows['email']; ?>" class="btn btn-sm btn-neutral">View</a>
+                                                    <button type="button" onclick="delete<?php echo $bookingsrows['id']; ?>();" class="btn btn-sm btn-square btn-neutral text-danger-hover">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                    <script>
+                                                        function delete<?php echo $bookingsrows['id']; ?>() {
+                                                            var action = window.confirm("Do not delete a user if its not necessary! Are you sure you want to delete <?php echo $bookingsrows['email']; ?>?");
+                                                            if (action) {
+                                                                document.location.href = '../forms/delete.php?id=user&uid=<?php echo $bookingsrows['id']; ?>';
+                                                            } else {
+                                                                document.location.href = './?p=users';
+                                                            }
+                                                        }
+                                                    </script>
+                                                </td>
+                                            </tr>
+
+
+
+
+
+
+
+
+                        <?php } }elseif (isset($_GET['p']) and $_GET['p'] == 'withdrawals') {
+
+
+
+
+
+
+
+
+                                        include '../config.php';
+                                        $bookings = mysqli_query($con, "SELECT users.id, users.email, withdrawals.user_id, withdrawals.amount, withdrawals.withdrawal_time, withdrawals.transaction
+                                        FROM users
+                                        INNER JOIN withdrawals ON withdrawals.user_id = users.id 
+                                        WHERE withdrawals.user_id = '".$_SESSION['user_id']."'
+                                        ORDER BY id DESC");
+                                        while ($bookingsrows = mysqli_fetch_array($bookings)) {
+                                        ?>
+
+
+
+
+
+
+                                            <tr>
+                                                <td>
+                                                    <i class="bi bi-person"></i>
+                                                    <a class="text-heading font-semibold" href="#">
+                                                        <?php echo $bookingsrows['email']; ?>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <i class="bi bi-person"></i>
+                                                    <a class="text-heading font-semibold" href="#">
+                                                        <?php echo $bookingsrows['amount']; ?>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <i class="bi bi-envelope"></i>
+                                                    <a class="text-heading font-semibold" href="#">
+                                                        <?php echo $bookingsrows['withdrawal_time']; ?>.
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <i class="bi bi-envelope"></i>
+                                                    <a class="text-heading font-semibold" href="#">
+                                                        <?php echo $bookingsrows['transaction']; ?>.
+                                                    </a>
+                                                </td>
+                                                <td class="text-end">
+                                                    <a href="item.php?p=users&bid=<?php echo $bookingsrows['id']; ?>&userid=<?php echo $bookingsrows['email']; ?>" class="btn btn-sm btn-neutral">View</a>
+                                                    <button type="button" onclick="delete<?php echo $bookingsrows['id']; ?>();" class="btn btn-sm btn-square btn-neutral text-danger-hover">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                    <script>
+                                                        function delete<?php echo $bookingsrows['id']; ?>() {
+                                                            var action = window.confirm("Do not delete a user if its not necessary! Are you sure you want to delete <?php echo $bookingsrows['email']; ?>?");
+                                                            if (action) {
+                                                                document.location.href = '../forms/delete.php?id=user&uid=<?php echo $bookingsrows['id']; ?>';
+                                                            } else {
+                                                                document.location.href = './?p=users';
+                                                            }
+                                                        }
+                                                    </script>
+                                                </td>
+                                            </tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                            <?php  } }elseif (isset($_GET['p']) and $_GET['p'] == 'Deposits') {
+
+
+
+
+
+
+
+
+                                            include '../config.php';
+                                            $bookings = mysqli_query($con, "SELECT users.id, users.fullname, users.email, deposits.id AS did, deposits.user_id, deposits.deposit_time, deposits.transaction, deposits.amount 
+                                            FROM deposits 
+                                            INNER JOIN users ON deposits.user_id = users.id 
+                                            WHERE deposits .user_id = '".$_SESSION['user_id']."'
+                                            ORDER BY did DESC");
+                                            while ($bookingsrows = mysqli_fetch_array($bookings)) {
+                                            ?>
+                                            
+                                            
+                                            
+                                            
+                                            <tr>
+                                                <td>
+                                                    <i class="bi bi-person"></i>
+                                                    <a class="text-heading font-semibold" href="#">
+                                                        <?php echo $bookingsrows['email']; ?>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <i class="bi bi-person"></i>
+                                                    <a class="text-heading font-semibold" href="#">
+                                                        <?php echo $bookingsrows['amount']; ?>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <i class="bi bi-envelope"></i>
+                                                    <a class="text-heading font-semibold" href="#">
+                                                        <?php echo $bookingsrows['deposit_time']; ?>.
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <i class="bi bi-envelope"></i>
+                                                    <a class="text-heading font-semibold" href="#">
+                                                        <?php echo $bookingsrows['transaction']; ?>.
+                                                    </a>
+                                                </td>
+                                                <td class="text-end">
+                                                    <a href="item.php?p=users&bid=<?php echo $bookingsrows['id']; ?>&userid=<?php echo $bookingsrows['email']; ?>" class="btn btn-sm btn-neutral">View</a>
+                                                    <button type="button" onclick="delete<?php echo $bookingsrows['id']; ?>();" class="btn btn-sm btn-square btn-neutral text-danger-hover">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                    <script>
+                                                        function delete<?php echo $bookingsrows['id']; ?>() {
+                                                            var action = window.confirm("Do not delete a user if its not necessary! Are you sure you want to delete <?php echo $bookingsrows['email']; ?>?");
+                                                            if (action) {
+                                                                document.location.href = '../forms/delete.php?id=user&uid=<?php echo $bookingsrows['id']; ?>';
+                                                            } else {
+                                                                document.location.href = './?p=users';
+                                                            }
+                                                        }
+                                                    </script>
+                                                </td>
+                                            </tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                            <?php }} else { ?>
+                            <h1 class="h2 mb-0 ls-tight p-4">Welcome Admin</h1>
+                        <?php } ?>
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+
+                       
+
+
+                        <div class="card-footer border-0 py-5">
+                            <span class="text-muted text-sm">Showing all items out of results found</span>
+                        </div>
+                    </div>
+                </div>
+            </main>
         </div>
     </div>
-    <div class="form-container">
-        <form action="../home/index.php" method="post">
-        <div class="field-container">
-            <label>Phone No.</label>
-            <input type="text" placeholder="enter phone" name="phone" maxlength="20" required>
-        </div>
-        <div class="field-container">
-            <label >Account No.</label>
-            <input type="text" name="accno" value="<?php echo $_SESSION['accountno']; ?>">
-        </div>
-        <div class="field-container">
-            <label>Amount to Withdraw</label>
-            <input type="text" placeholder="enter amount to withdraw" name="amount" required>
-        </div>
-        <div class="field-container">   
-        </div>
-        <hr>
-        <div class="field-container">
-            <button style="width:350px;height:45px;background-color:grey;border:none;color:white;" type="submit">Withdraw</button>
-        </div>
-        </form>
+
+    </table>
     </div>
-   
-    <script>
-        function separateNumber(number) {
-        var str = number.toString();
-        var result = '';
-        for (var i = 0; i < str.length; i++) {
-            if (i > 0 && i % 4 == 0) {
-            result += ' ';
-            }
-            result += str.charAt(i);
-        }
-        return result;
-        }
-        var number = <?php echo $_SESSION['cardno']?>;
-        document.getElementById("accno").innerHTML = separateNumber(number);
-    </script>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
+
 </html>
