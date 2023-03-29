@@ -92,6 +92,8 @@
             <label for="" class="">Card No.</label>
             <input type="text" disabled value="<?php echo $_SESSION['cardno']; ?>" class="form-control" maxlength="100"/>
           </div>
+          <br>
+          <hr>
           <div class="form-group">
             <label for="" class="">Update Password</label>
             <input type="text" name="password" class="form-control" maxlength="100"/ required>
