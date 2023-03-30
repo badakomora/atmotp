@@ -55,13 +55,12 @@ function withdraw() {
         $sms = $AT->sms();
 
         include '../config.php';
-        $query = mysqli_query($con, "SELECT * FROM users WHERE accountno = '".$_POST['accno']."'");
+        $query = mysqli_query($con, "SELECT * FROM users WHERE phone = '".$_POST['accno']."'");
         $num = mysqli_num_rows($query);
         $row = mysqli_fetch_array($query);
-        $phone = $row['phone'];
         // Set the numbers you want to send to in international format
         if ($num >= 1) {
-        $recipients = $phone;
+        $recipients = $row['phone'];
       
         //otp generator
         $otp = rand(100000, 999999);//OTP generate
@@ -78,7 +77,7 @@ function withdraw() {
         'from' => $from
         ]);
         $accno = $_POST['accno'];
-        $msg = "Forget Password request sent succesfully! An otp has been sent to this Account number registered phone number, verify it to complete forget password request.";
+        $msg = "Forget Password request sent succesfully! An otp has been sent to this phone number, verify it to complete forget password request.";
         echo "<script type='text/javascript'>alert('$msg');</script>";
         header("refresh: 0,../account/otp.php?otp=$value&accno=$accno");
         // print_r($result);
@@ -87,9 +86,9 @@ function withdraw() {
         }
 
       }else{
-        $msg = "This Account number does not exit!";
+        $msg = "This Account Phone number does not exit!";
         echo "<script type='text/javascript'>alert('$msg');</script>";
-       header("refresh: 0,../");
+        header("refresh: 0,../");
       }
     }
     forgetpass();

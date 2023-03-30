@@ -86,6 +86,7 @@ if (isset($_POST['login'])) {
 
       <div class="user_options-forms" id="user_options-forms">
         <div class="user_forms-login">
+          <img src="https://www.pacuniversity.ac.ke/wp-content/uploads/2021/11/New-Logo-800x204.png" height="100%" width="100%" alt="">
           <h2 class="forms_title">Login</h2>
           <form class="forms_form" method="post" action="">
             <fieldset class="forms_fieldset">
@@ -103,6 +104,7 @@ if (isset($_POST['login'])) {
           </form>
         </div>
         <div class="user_forms-signup">
+        <img src="https://www.pacuniversity.ac.ke/wp-content/uploads/2021/11/New-Logo-800x204.png" height="100%" width="100%" alt="">
           <h2 class="forms_title">Sign Up</h2>
           <form class="forms_form" method="POST" action="">
             <fieldset class="forms_fieldset">

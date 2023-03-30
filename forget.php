@@ -7,10 +7,10 @@ if(isset($_POST['updatepass'])){
     include './config.php';
     $accno = $_GET['accno'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-    mysqli_query($con, "UPDATE users SET password = '$password' WHERE accountno = '$accno' ");
-    $msg = "Password updated successfully!.";
+    mysqli_query($con, "UPDATE users SET password = '$password' WHERE phone = '$accno' ");
+    $msg = "Password updated successfully! Proceed to login with the new password.";
     echo "<script type='text/javascript'>alert('$msg');</script>";
-    // header("refresh: 0,./");
+    header("refresh: 0,./");
     
 }
 
@@ -75,9 +75,9 @@ if(isset($_POST['updatepass'])){
     <br><br>
         <form action="./home/index.php" method="post">
         <div class="field-container">
-            <label>Account No.</label><br>
+            <label>Phone No.</label><br>
             <hr width="100%">
-            <input placeholder="Enter your account no." style="width:340px;height:45px;" name="accno" required>
+            <input placeholder="Enter account registered phone no." style="width:340px;height:45px;" name="accno" required>
         </div>
         <br>
         <div class="field-container">   

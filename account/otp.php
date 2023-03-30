@@ -64,7 +64,7 @@ if(isset($_GET['amount'])){
         <br><br>
             <form action="" method="post">
             <div class="field-container">
-                <label>Provide OTP to complete transaction</label><br>
+                <label>Provide OTP to complete withdrawal transaction</label><br>
                 <hr width="50%">
                 <input placeholder=" Enter the otp sent to your phone" style="width:340px;height:45px;" name="otpno" required>
             </div>
@@ -129,9 +129,9 @@ if(isset($_POST['password'])) {
         echo "<script type='text/javascript'>alert('$msg');</script>";
         header("refresh: 0, ../forget.php?accno=$accno&request=successfully");
     }else{
-        $msg = "Please provide the correct otp to complete this forget password request!";
+        $msg = "Please provide the correct otp to complete forget password request!";
         echo "<script type='text/javascript'>alert('$msg');</script>";
-        header("refresh: 0, ./");
+        header("refresh: 0, ../");
     }
 }
 ?>
@@ -151,7 +151,7 @@ if(isset($_POST['password'])) {
     <br><br>
         <form action="" method="post">
         <div class="field-container">
-            <label>Provide OTP to complete transaction</label><br>
+            <label>Provide OTP to complete forget password request</label><br>
             <hr width="50%">
             <input placeholder=" Enter the otp sent to your phone" style="width:340px;height:45px;" name="otpno" required>
         </div>

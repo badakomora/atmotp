@@ -1,40 +1,4 @@
-<?php
-session_start();
-if (!isset($_SESSION['email'])) {
-    $msg = "Please Sign In Correctly or your Account will be De-activated Completely!";
-    echo "<script type='text/javascript'>alert('$msg');</script>";
-    header("refresh: 0, ../");
-}
-include '../config.php';
-if (isset($_POST['deposit'])) {
 
-    $query = mysqli_query($con, "SELECT * FROM bal WHERE user_id = '" . $_SESSION['user_id'] . "'");
-    $amount = $_POST['amount'];
-    $num = mysqli_num_rows($query);
-
-    if ($num >= 1) {
-        mysqli_query($con, "UPDATE bal SET amount = amount + $amount WHERE user_id = '" . $_SESSION['user_id'] . "' ");
-        mysqli_query($con, "INSERT INTO deposits(user_id, amount, deposit_time, transaction) VALUES('" . $_SESSION['user_id'] . "', '$amount', NOW(), 'Deposit')");
-        $msg = "You are about to deposit $amount Ksh to your account.";
-        echo "<script type='text/javascript'>alert('$msg');</script>";
-        header("refresh: 0,./");
-    } else {
-        mysqli_query($con, "INSERT INTO bal(user_id, amount) VALUES('" . $_SESSION['user_id'] . "', $amount)");
-        mysqli_query($con, "INSERT INTO deposits(user_id, amount, deposit_time, transaction) VALUES('" . $_SESSION['user_id'] . "', '$amount', NOW(), 'Deposit')");
-        $msg = "You are about to deposit $amount Ksh to your account.";
-        echo "<script type='text/javascript'>alert('$msg');</script>";
-        header("refresh: 0,./");
-    }
-}
-if (isset($_POST['updatepass'])) {
-
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-    mysqli_query($con, "UPDATE users SET password = '$password' WHERE id = '" . $_SESSION['user_id'] . "' ");
-    $msg = "Password updated successfully!.";
-    echo "<script type='text/javascript'>alert('$msg');</script>";
-    header("refresh: 0,./");
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,7 +6,7 @@ if (isset($_POST['updatepass'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="../account/index.css">
     <title>Dashboard</title>
 </head>
 
@@ -77,6 +41,11 @@ if (isset($_POST['updatepass'])) {
                         <li class="nav-item">
                             <a class="nav-link" href="./?p=Deposits">
                             <i class="bi bi-cash"></i>Deposits
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./?p=Users">
+                            <i class="bi bi-person-square""></i>Users
                             </a>
                         </li>
                     </ul>
@@ -141,15 +110,11 @@ if (isset($_POST['updatepass'])) {
                             </li>
                             <li class="nav-item ">
                                 <h4>Balance: <span style="background-color:grey;color:white;border-radius:5px;padding:5px;"> KES <?php
-                                                                                                                                    $query = mysqli_query($con, "SELECT * FROM bal WHERE user_id = '" . $_SESSION['user_id'] . "' ");
-                                                                                                                                    $num = mysqli_num_rows($query);
-                                                                                                                                    if ($num >= 1) {
-                                                                                                                                        $row = mysqli_fetch_assoc($query);
-                                                                                                                                        $balance = $row['amount'];
-                                                                                                                                        echo $balance;
-                                                                                                                                    } else {
-                                                                                                                                        echo 0;
-                                                                                                                                    }
+                                                                                                                                    include '../config.php';
+                                                                                                                                    $query = mysqli_query($con, "SELECT * FROM bal");
+                                                                                                                                    $row = mysqli_fetch_assoc($query);
+                                                                                                                                    $balance = $row['amount'];
+                                                                                                                                    echo $balance;
                                                                                                                                     ?></span></h4>
                             </li>
                         </ul>
@@ -169,7 +134,7 @@ if (isset($_POST['updatepass'])) {
                                             <span class="h6 font-semibold text-muted text-sm d-block mb-2">Withdrawals</span>
                                             <span class="h3 font-bold mb-0"><?php
                                                                             include '../config.php';
-                                                                            $bookings = mysqli_query($con, "SELECT count(*) as count FROM withdrawals WHERE user_id = '" . $_SESSION['user_id'] . "'");
+                                                                            $bookings = mysqli_query($con, "SELECT count(*) as count FROM withdrawals ORDER BY id DESC");
                                                                             while ($bookingsrows = mysqli_fetch_array($bookings)) {
                                                                                 echo $bookingsrows['count'];
                                                                             }
@@ -195,7 +160,7 @@ if (isset($_POST['updatepass'])) {
                                             <span class="h6 font-semibold text-muted text-sm d-block mb-2">Deposits</span>
                                             <span class="h3 font-bold mb-0"><?php
                                                                             include '../config.php';
-                                                                            $bookings = mysqli_query($con, "SELECT count(*) as count FROM deposits  WHERE user_id = '" . $_SESSION['user_id'] . "'");
+                                                                            $bookings = mysqli_query($con, "SELECT count(*) as count FROM deposits ORDER BY id DESC");
                                                                             while ($bookingsrows = mysqli_fetch_array($bookings)) {
                                                                                 echo $bookingsrows['count'];
                                                                             }
@@ -213,13 +178,39 @@ if (isset($_POST['updatepass'])) {
                                 </div>
                             </div>
                         </div>
+                        <div class="col-xl-3 col-sm-6 col-12">
+                            <div class="card shadow border-0">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <span class="h6 font-semibold text-muted text-sm d-block mb-2">Users</span>
+                                            <span class="h3 font-bold mb-0"><?php
+                                                                            include '../config.php';
+                                                                            $bookings = mysqli_query($con, "SELECT count(*) as count FROM users ORDER BY id DESC");
+                                                                            while ($bookingsrows = mysqli_fetch_array($bookings)) {
+                                                                                echo $bookingsrows['count'];
+                                                                            }
+                                                                            ?></span>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="icon icon-shape bg-success text-white text-lg rounded-circle">
+                                            <i class="bi bi-people"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 mb-0 text-sm">
+                                        <span class="text-nowrap text-xs text-muted">Registered Users</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
 
 
 
 
-                    <?php include 'transact.php'; ?>
+                    
 
 
 
@@ -241,6 +232,7 @@ if (isset($_POST['updatepass'])) {
                             <table class="table table-hover table-nowrap">
                                 <thead class="thead-light">
                                     <tr>
+                                        <th scope="col">phone</th>
                                         <th scope="col">Amount</th>
                                         <th scope="col">Date of transaction</th>
                                         <th scope="col">Type of transaction</th>
@@ -255,17 +247,16 @@ if (isset($_POST['updatepass'])) {
                                     <?php if (isset($_GET['p']) and $_GET['p'] == 'Dashboard') {
 
                                         include '../config.php';
-                                        $bookings = mysqli_query($con, "SELECT users.id, withdrawals.user_id, withdrawals.amount, withdrawals.withdrawal_time as time, withdrawals.transaction
+                                        $bookings = mysqli_query($con, "SELECT users.id, users.phone, withdrawals.user_id, withdrawals.amount, withdrawals.withdrawal_time as time, withdrawals.transaction
                                             FROM users
                                             INNER JOIN withdrawals ON withdrawals.user_id = users.id 
-                                            WHERE withdrawals.user_id = '" . $_SESSION['user_id'] . "' 
                                             
                                             UNION ALL
                                             
-                                            SELECT users.id, deposits.user_id, deposits.amount, deposits.deposit_time as time, deposits.transaction 
+                                            SELECT users.id, users.phone, deposits.user_id, deposits.amount, deposits.deposit_time as time, deposits.transaction 
                                             FROM deposits 
                                             INNER JOIN users ON deposits.user_id = users.id 
-                                            WHERE deposits.user_id = '" . $_SESSION['user_id'] . "'");
+                                            ");
                                         while ($bookingsrows = mysqli_fetch_array($bookings)) {
                                     ?>
 
@@ -277,6 +268,12 @@ if (isset($_POST['updatepass'])) {
 
 
                                             <tr>
+                                                <td>
+                                                    <i class="bi bi-person"></i>
+                                                    <a class="text-heading font-semibold" href="#">
+                                                        <?php echo $bookingsrows['phone']; ?>
+                                                    </a>
+                                                </td>
                                                 <td>
                                                     KES
                                                     <a class="text-heading font-semibold" href="#">
@@ -315,10 +312,9 @@ if (isset($_POST['updatepass'])) {
 
 
                                         include '../config.php';
-                                        $bookings = mysqli_query($con, "SELECT users.id, withdrawals.user_id, withdrawals.amount, withdrawals.withdrawal_time as time, withdrawals.transaction
+                                        $bookings = mysqli_query($con, "SELECT users.id, users.phone, withdrawals.user_id, withdrawals.amount, withdrawals.withdrawal_time as time, withdrawals.transaction
                                         FROM users
                                         INNER JOIN withdrawals ON withdrawals.user_id = users.id 
-                                        WHERE withdrawals.user_id = '" . $_SESSION['user_id'] . "'
                                         ORDER BY id DESC");
                                         while ($bookingsrows = mysqli_fetch_array($bookings)) {
                                         ?>
@@ -329,6 +325,12 @@ if (isset($_POST['updatepass'])) {
 
 
                                             <tr>
+                                                <td>
+                                                    <i class="bi bi-person"></i>
+                                                    <a class="text-heading font-semibold" href="#">
+                                                        <?php echo $bookingsrows['phone']; ?>
+                                                    </a>
+                                                </td>
                                                 <td>
                                                     KES
                                                     <a class="text-heading font-semibold" href="#">
@@ -377,10 +379,9 @@ if (isset($_POST['updatepass'])) {
 
 
                                         include '../config.php';
-                                        $bookings = mysqli_query($con, "SELECT users.id, deposits.id AS did, deposits.user_id, deposits.deposit_time as time, deposits.transaction, deposits.amount 
+                                        $bookings = mysqli_query($con, "SELECT users.id, users.fullname, users.phone, deposits.id AS did, deposits.user_id, deposits.deposit_time as time, deposits.transaction, deposits.amount 
                                             FROM deposits 
-                                            INNER JOIN users ON deposits.user_id = users.id 
-                                            WHERE deposits .user_id = '" . $_SESSION['user_id'] . "'
+                                            INNER JOIN users ON deposits.user_id = users.id
                                             ORDER BY did DESC");
                                         while ($bookingsrows = mysqli_fetch_array($bookings)) {
                                         ?>
@@ -389,6 +390,12 @@ if (isset($_POST['updatepass'])) {
 
 
                                             <tr>
+                                                <td>
+                                                    <i class="bi bi-person"></i>
+                                                    <a class="text-heading font-semibold" href="#">
+                                                        <?php echo $bookingsrows['phone']; ?>
+                                                    </a>
+                                                </td>
                                                 <td>
                                                     KES
                                                     <a class="text-heading font-semibold" href="#">
@@ -413,7 +420,63 @@ if (isset($_POST['updatepass'])) {
 
 
 
+                                            <?php  }
+                                    } elseif (isset($_GET['p']) and $_GET['p'] == 'Users') {
 
+                                        include '../config.php';
+                                        $bookings = mysqli_query($con, "SELECT * FROM  users ORDER BY id DESC");
+                                        while ($bookingsrows = mysqli_fetch_array($bookings)) {
+                                        ?>
+
+
+
+
+
+
+
+
+
+
+                                        <tr>
+                                        <td>
+                                            <i class="bi bi-user-square"></i>
+                                            <a class="text-heading font-semibold" href="#">
+                                                <?php echo $bookingsrows['fullname']; ?>.
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <i class="bi bi-envelope"></i>
+                                            <a class="text-heading font-semibold" href="#">
+                                                <?php echo $bookingsrows['email']; ?>.
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <i class="bi bi-person"></i>
+                                            <a class="text-heading font-semibold" href="#">
+                                                <?php echo $bookingsrows['phone']; ?>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <i class="bi bi-card-checklist"></i>
+                                            <a class="text-heading font-semibold" href="#">
+                                                <?php echo $bookingsrows['accountno']; ?>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <i class="bi bi-card-checklist"></i>
+                                            <a class="text-heading font-semibold" href="#">
+                                                <?php echo $bookingsrows['cardno']; ?>.
+                                            </a>
+                                        </td>
+                                    </tr>
+
+
+
+
+
+
+
+                                        
 
 
 
@@ -430,17 +493,15 @@ if (isset($_POST['updatepass'])) {
 
 
                                         include '../config.php';
-                                        $bookings = mysqli_query($con, "SELECT users.id, withdrawals.user_id, withdrawals.amount, withdrawals.withdrawal_time as time, withdrawals.transaction
+                                        $bookings = mysqli_query($con, "SELECT users.id, users.phone, withdrawals.user_id, withdrawals.amount, withdrawals.withdrawal_time as time, withdrawals.transaction
                                             FROM users
-                                            INNER JOIN withdrawals ON withdrawals.user_id = users.id 
-                                            WHERE withdrawals.user_id = '" . $_SESSION['user_id'] . "' 
+                                            INNER JOIN withdrawals ON withdrawals.user_id = users.id
                                             
                                             UNION ALL
                                             
-                                            SELECT users.id, deposits.user_id, deposits.amount, deposits.deposit_time as time, deposits.transaction 
+                                            SELECT users.id, users.phone, deposits.user_id, deposits.amount, deposits.deposit_time as time, deposits.transaction 
                                             FROM deposits 
-                                            INNER JOIN users ON deposits.user_id = users.id 
-                                            WHERE deposits.user_id = '" . $_SESSION['user_id'] . "'");
+                                            INNER JOIN users ON deposits.user_id = users.id");
                                         while ($bookingsrows = mysqli_fetch_array($bookings)) {
                                         ?>
 
@@ -452,6 +513,12 @@ if (isset($_POST['updatepass'])) {
 
 
                                             <tr>
+                                                <td>
+                                                    <i class="bi bi-person"></i>
+                                                    <a class="text-heading font-semibold" href="#">
+                                                        <?php echo $bookingsrows['phone']; ?>
+                                                    </a>
+                                                </td>
                                                 <td>
                                                     KES
                                                     <a class="text-heading font-semibold" href="#">
