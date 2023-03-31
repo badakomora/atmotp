@@ -20,7 +20,7 @@ if (isset($_POST['login'])) {
       $msg = "Login Access Granted. You will find your account no. and other account information in your account. WELCOME!";
       echo "<script type='text/javascript'>alert('$msg');</script>";
     } else {
-      header('refresh: 0, ./adminlogin/php');
+      header('refresh: 0, ./adminlogin.php');
       $msg = "Login Access Denied. Please use the correct credentials";
       echo "<script type='text/javascript'>alert('$msg');</script>";
     }

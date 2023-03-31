@@ -137,7 +137,7 @@ if (isset($_POST['updatepass'])) {
                         <!-- Nav -->
                         <ul class="nav nav-tabs mt-4 overflow-x border-0 d-flex justify-content-between">
                             <li class="nav-item ">
-                                <a href="./?all=<?php echo $_GET['p']; ?>" class="nav-link active">All</a>
+                                <a href="./?p=<?php echo $_GET['p']; ?>" class="nav-link active">All</a>
                             </li>
                             <li class="nav-item ">
                                 <h4>Balance: <span style="background-color:grey;color:white;border-radius:5px;padding:5px;"> KES <?php

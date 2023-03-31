@@ -106,7 +106,7 @@ if (isset($_POST['updatepass'])) {
                                 } else { ?>
                                     <h1 class="h2 mb-0 ls-tigh m-2t">Dashboard</h1>
                                 <?php } ?>
-                                <span class="mt-4">(Admin Area)</span>
+                                <span class="mt-2">(Admin Area)</span>
                             </div>
                             <!-- Actions -->
                             <div class="col-sm-6 col-12 text-sm-end">
