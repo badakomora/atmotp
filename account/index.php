@@ -160,6 +160,7 @@ if (isset($_POST['updatepass'])) {
             <main class="py-6 bg-surface-secondary">
                 <div class="container-fluid">
                     <!-- Card stats -->
+                    <?php if (isset($_GET['p']) and $_GET['p'] == 'Dashboard') { ?>
                     <div class="row g-6 mb-6">
                         <div class="col-xl-3 col-sm-6 col-12">
                             <div class="card shadow border-0">
@@ -177,7 +178,7 @@ if (isset($_POST['updatepass'])) {
                                         </div>
                                         <div class="col-auto">
                                             <div class="icon icon-shape bg-tertiary text-white text-lg rounded-circle">
-                                            <span class="mb-1">&larr;</span><i class="bi bi-cash"></i>
+                                            <i class="bi bi-cash"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -203,7 +204,7 @@ if (isset($_POST['updatepass'])) {
                                         </div>
                                         <div class="col-auto">
                                             <div class="icon icon-shape bg-primary text-white text-lg rounded-circle">
-                                            <span class="mb-1">&rarr;</span><i class="bi bi-cash"></i>
+                                            <i class="bi bi-cash"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -216,10 +217,10 @@ if (isset($_POST['updatepass'])) {
 
                     </div>
 
+                <?php }?>
 
 
-
-                    <?php include 'transact.php'; ?>
+                    <?php include '../account/transact.php'; ?>
 
 
 

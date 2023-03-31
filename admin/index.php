@@ -1,4 +1,19 @@
-
+<?php
+session_start();
+if (!isset($_SESSION['email'])) {
+    $msg = "Please Sign In Correctly or your Account will be De-activated Completely!";
+    echo "<script type='text/javascript'>alert('$msg');</script>";
+    header("refresh: 0, ../");
+}
+if (isset($_POST['updatepass'])) {
+    include '../config.php';
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    mysqli_query($con, "UPDATE admin SET password = '$password' WHERE email = '" . $_SESSION['email'] . "' ");
+    $msg = "Password updated successfully!.";
+    echo "<script type='text/javascript'>alert('$msg');</script>";
+    header("refresh: 0,./");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,7 +37,7 @@
                 </button>
                 <!-- Brand -->
                 <a class="navbar-brand py-lg-2 mb-lg-5 px-lg-6 me-0 text-underline" href="#">
-                    <!-- <img src="#" alt="..."> --> <b><i>SMART ATM</i></b> 
+                    <!-- <img src="#" alt="..."> --> <b><i>SMART ATM</i></b>
                 </a>
                 <!-- Collapse -->
                 <div class="collapse navbar-collapse" id="sidebarCollapse">
@@ -85,21 +100,24 @@
                                         <h1 class="h2 mb-0 ls-tight m-2">Deposits</h1>
                                     <?php  } elseif ($_GET['p'] == 'Dashboard') { ?>
                                         <h1 class="h2 mb-0 ls-tight m-2">Dashboard</h1>
+                                    <?php  } elseif ($_GET['p'] == 'Users') { ?>
+                                        <h1 class="h2 mb-0 ls-tight m-2">Users</h1>
                                     <?php }
                                 } else { ?>
                                     <h1 class="h2 mb-0 ls-tigh m-2t">Dashboard</h1>
                                 <?php } ?>
+                                <span class="mt-4">(Admin Area)</span>
                             </div>
                             <!-- Actions -->
                             <div class="col-sm-6 col-12 text-sm-end">
                                 <div class="mx-n1">
-                                    <a href="#" class="btn-primary d-inline-flex btn-sm mx-1" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <span>Transact</span>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <a class="dropdown-item" href="#" type="button" data-toggle="modal" data-target="#deposit">Deposit</a>
-                                            <a class="dropdown-item" href="#" type="button" data-toggle="modal" data-target="#withdraw">Withdraw</a>
-                                        </div>
-                                    </a>
+                                <h4>Balance: <span style="background-color:grey;color:white;border-radius:5px;padding:5px;"> KES <?php
+                                                                                                                                    include '../config.php';
+                                                                                                                                    $query = mysqli_query($con, "SELECT * FROM bal");
+                                                                                                                                    $row = mysqli_fetch_assoc($query);
+                                                                                                                                    $balance = $row['amount'];
+                                                                                                                                    echo $balance;
+                                                                                                                                    ?></span></h4>
                                 </div>
                             </div>
                         </div>
@@ -109,13 +127,7 @@
                                 <a href="./?all=<?php echo $_GET['p']; ?>" class="nav-link active">All</a>
                             </li>
                             <li class="nav-item ">
-                                <h4>Balance: <span style="background-color:grey;color:white;border-radius:5px;padding:5px;"> KES <?php
-                                                                                                                                    include '../config.php';
-                                                                                                                                    $query = mysqli_query($con, "SELECT * FROM bal");
-                                                                                                                                    $row = mysqli_fetch_assoc($query);
-                                                                                                                                    $balance = $row['amount'];
-                                                                                                                                    echo $balance;
-                                                                                                                                    ?></span></h4>
+                                
                             </li>
                         </ul>
                     </div>
@@ -142,7 +154,7 @@
                                         </div>
                                         <div class="col-auto">
                                             <div class="icon icon-shape bg-tertiary text-white text-lg rounded-circle">
-                                            <span class="mb-1">&larr;</span><i class="bi bi-cash"></i>
+                                            <i class="bi bi-cash"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -168,7 +180,7 @@
                                         </div>
                                         <div class="col-auto">
                                             <div class="icon icon-shape bg-primary text-white text-lg rounded-circle">
-                                            <span class="mb-1">&rarr;</span><i class="bi bi-cash"></i>
+                                            <i class="bi bi-cash"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -210,8 +222,44 @@
 
 
 
-                    
+                    <!-- account Modal -->
+                    <div class="modal fade" id="account" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Admin Information</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="" method="post">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="" class="">Email</label>
+                                <input type="text" disabled value="<?php echo $_SESSION['email']; ?>" class="form-control" maxlength="100"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="">Staff</label>
+                                <input type="text" disabled value="<?php echo $_SESSION['fullname']; ?>" class="form-control" maxlength="100"/>
+                            </div>
+                            <hr>
+                            <div class="form-group">
+                                <label for="" class="">Update Password</label>
+                                <input type="text" name="password" class="form-control" maxlength="100"/ required>
+                            </div>
+                        </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button class="btn btn-primary" type="submit" name="updatepass">Update</button>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                    </div>
 
+
+
+                    
 
 
 
@@ -223,6 +271,8 @@
                                 <h5 class="mb-0">Withdrawals</h5>
                             <?php } elseif (isset($_GET['p']) and $_GET['p'] == 'Deposits') { ?>
                                 <h5 class="mb-0">Deposits</h5>
+                            <?php }elseif(isset($_GET['p']) and $_GET['p'] == 'Users') {?>
+                                <h5 class="mb-0">Users</h5>
                             <?php } else { ?>
                                 <h5 class="mb-0">Dashboard</h5>
                             <?php } ?>
@@ -231,12 +281,23 @@
                         <div class="table-responsive">
                             <table class="table table-hover table-nowrap">
                                 <thead class="thead-light">
+                                    <?php if(isset($_GET['p']) and $_GET['p'] == 'Users') {?>
+                                    <tr>
+                                        <th scope="col">Full Name</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Phone No.</th>
+                                        <th scope="col">Account No.</th>
+                                        <th scope="col">Card No.</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                    <?php }else{?>
                                     <tr>
                                         <th scope="col">phone</th>
                                         <th scope="col">Amount</th>
                                         <th scope="col">Date of transaction</th>
                                         <th scope="col">Type of transaction</th>
                                     </tr>
+                                    <?php }?>
                                 </thead>
                                 <tbody>
 
@@ -247,13 +308,13 @@
                                     <?php if (isset($_GET['p']) and $_GET['p'] == 'Dashboard') {
 
                                         include '../config.php';
-                                        $bookings = mysqli_query($con, "SELECT users.id, users.phone, withdrawals.user_id, withdrawals.amount, withdrawals.withdrawal_time as time, withdrawals.transaction
+                                        $bookings = mysqli_query($con, "SELECT users.id, users.fullname, users.email, users.accountno, users.cardno, users.phone, withdrawals.user_id, withdrawals.amount, withdrawals.withdrawal_time as time, withdrawals.transaction
                                             FROM users
                                             INNER JOIN withdrawals ON withdrawals.user_id = users.id 
                                             
                                             UNION ALL
                                             
-                                            SELECT users.id, users.phone, deposits.user_id, deposits.amount, deposits.deposit_time as time, deposits.transaction 
+                                            SELECT users.id, users.fullname, users.email, users.accountno, users.cardno, users.phone, deposits.user_id, deposits.amount, deposits.deposit_time as time, deposits.transaction 
                                             FROM deposits 
                                             INNER JOIN users ON deposits.user_id = users.id 
                                             ");
@@ -270,7 +331,7 @@
                                             <tr>
                                                 <td>
                                                     <i class="bi bi-person"></i>
-                                                    <a class="text-heading font-semibold" href="#">
+                                                    <a class="text-heading font-semibold" type="button" data-toggle="modal" data-target="#user">
                                                         <?php echo $bookingsrows['phone']; ?>
                                                     </a>
                                                 </td>
@@ -297,7 +358,43 @@
 
 
 
-
+<!-- user Modal -->
+<div class="modal fade" id="user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">User information</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="" method="post">
+                        <div class="modal-body">
+                        <div class="form-group">
+                                <label for="" class="">Full Name</label>
+                                <input type="text" disabled value=" <?php echo $bookingsrows['fullname']; ?>" class="form-control" maxlength="100"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="">Email</label>
+                                <input type="text" disabled value=" <?php echo $bookingsrows['email']; ?>" class="form-control" maxlength="100"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="">Account No.</label>
+                                <input type="text" disabled value=" <?php echo $bookingsrows['accountno']; ?>" class="form-control" maxlength="100"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="">Card No.</label>
+                                <input type="text" disabled value="<?php echo $bookingsrows['cardno']; ?>" class="form-control" maxlength="100"/>
+                            </div>
+                            <br>
+                            <hr>
+                        </div>
+                            <div class="modal-footer">
+                           </div>
+                        </form>
+                        </div>
+                    </div>
+                    </div>
 
 
 
@@ -312,7 +409,7 @@
 
 
                                         include '../config.php';
-                                        $bookings = mysqli_query($con, "SELECT users.id, users.phone, withdrawals.user_id, withdrawals.amount, withdrawals.withdrawal_time as time, withdrawals.transaction
+                                        $bookings = mysqli_query($con, "SELECT users.id, users.fullname, users.email, users.accountno, users.cardno,  users.phone, withdrawals.user_id, withdrawals.amount, withdrawals.withdrawal_time as time, withdrawals.transaction
                                         FROM users
                                         INNER JOIN withdrawals ON withdrawals.user_id = users.id 
                                         ORDER BY id DESC");
@@ -327,7 +424,7 @@
                                             <tr>
                                                 <td>
                                                     <i class="bi bi-person"></i>
-                                                    <a class="text-heading font-semibold" href="#">
+                                                    <a class="text-heading font-semibold" type="button" data-toggle="modal" data-target="#user">
                                                         <?php echo $bookingsrows['phone']; ?>
                                                     </a>
                                                 </td>
@@ -356,6 +453,48 @@
 
 
 
+
+
+
+
+
+                                            <!-- user Modal -->
+<div class="modal fade" id="user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">User information</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="" method="post">
+                        <div class="modal-body">
+                        <div class="form-group">
+                                <label for="" class="">Full Name</label>
+                                <input type="text" disabled value=" <?php echo $bookingsrows['fullname']; ?>" class="form-control" maxlength="100"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="">Email</label>
+                                <input type="text" disabled value=" <?php echo $bookingsrows['email']; ?>" class="form-control" maxlength="100"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="">Account No.</label>
+                                <input type="text" disabled value=" <?php echo $bookingsrows['accountno']; ?>" class="form-control" maxlength="100"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="">Card No.</label>
+                                <input type="text" disabled value="<?php echo $bookingsrows['cardno']; ?>" class="form-control" maxlength="100"/>
+                            </div>
+                            <br>
+                            <hr>
+                        </div>
+                            <div class="modal-footer">
+                           </div>
+                        </form>
+                        </div>
+                    </div>
+                    </div>
 
 
 
@@ -379,7 +518,7 @@
 
 
                                         include '../config.php';
-                                        $bookings = mysqli_query($con, "SELECT users.id, users.fullname, users.phone, deposits.id AS did, deposits.user_id, deposits.deposit_time as time, deposits.transaction, deposits.amount 
+                                        $bookings = mysqli_query($con, "SELECT users.id, users.fullname, users.email, users.accountno, users.cardno, users.phone, deposits.id AS did, deposits.user_id, deposits.deposit_time as time, deposits.transaction, deposits.amount 
                                             FROM deposits 
                                             INNER JOIN users ON deposits.user_id = users.id
                                             ORDER BY did DESC");
@@ -392,7 +531,7 @@
                                             <tr>
                                                 <td>
                                                     <i class="bi bi-person"></i>
-                                                    <a class="text-heading font-semibold" href="#">
+                                                    <a class="text-heading font-semibold" type="button" data-toggle="modal" data-target="#user">
                                                         <?php echo $bookingsrows['phone']; ?>
                                                     </a>
                                                 </td>
@@ -417,7 +556,43 @@
                                             </tr>
 
 
-
+                    <!-- user Modal -->
+                    <div class="modal fade" id="user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">User information</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="" method="post">
+                        <div class="modal-body">
+                        <div class="form-group">
+                                <label for="" class="">Full Name</label>
+                                <input type="text" disabled value=" <?php echo $bookingsrows['fullname']; ?>" class="form-control" maxlength="100"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="">Email</label>
+                                <input type="text" disabled value=" <?php echo $bookingsrows['email']; ?>" class="form-control" maxlength="100"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="">Account No.</label>
+                                <input type="text" disabled value=" <?php echo $bookingsrows['accountno']; ?>" class="form-control" maxlength="100"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="">Card No.</label>
+                                <input type="text" disabled value="<?php echo $bookingsrows['cardno']; ?>" class="form-control" maxlength="100"/>
+                            </div>
+                            <br>
+                            <hr>
+                        </div>
+                            <div class="modal-footer">
+                           </div>
+                        </form>
+                        </div>
+                    </div>
+                    </div>
 
 
                                             <?php  }
@@ -468,6 +643,26 @@
                                                 <?php echo $bookingsrows['cardno']; ?>.
                                             </a>
                                         </td>
+                                                <td class="text-end">
+                                                    <?php if($bookingsrows['status'] == 1){?>
+                                                      <a href="action.php?deactivate=<?php echo $bookingsrows['id']; ?>&status=0" class="btn btn-sm btn-success">Activate Account</a>
+                                                    <?php }else{?>
+                                                        <a href="action.php?deactivate=<?php echo $bookingsrows['id']; ?>&status=1" class="btn btn-sm btn-warning">Deactivate Account</a>                                                    
+                                                    <?php }?>
+                                                      <button type="button" onclick="delete<?php echo $bookingsrows['id']; ?>();" class="btn btn-sm btn-square btn-danger text-danger-hover">
+                                                            <i class="bi bi-trash"></i>
+                                                      </button>
+                                                        <script>
+                                                            function delete<?php echo $bookingsrows['id']; ?>() {
+                                                                var action = window.confirm("Are you sure you want to delete <?php echo $bookingsrows['email']; ?>?");
+                                                                if (action) {
+                                                                    document.location.href = 'action.php?delete=<?php echo $bookingsrows['id']; ?>';
+                                                                } else {
+                                                                    document.location.href = './?p=Users';
+                                                                }
+                                                            }
+                                                        </script>
+                                                    </td>
                                     </tr>
 
 

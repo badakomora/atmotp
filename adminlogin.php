@@ -6,7 +6,7 @@ if (isset($_POST['login'])) {
   $password = $_POST['password'];
   $msg = '';
 
-  $query = mysqli_query($con, "SELECT * FROM users where email = '$email'");
+  $query = mysqli_query($con, "SELECT * FROM admin where email = '$email'");
   $row = mysqli_fetch_assoc($query);
 
   if ($row >= 1) {
@@ -14,22 +14,13 @@ if (isset($_POST['login'])) {
 
       $_SESSION['user_id'] = $row['id'];
       $_SESSION['fullname'] = $row['fullname'];
-      $_SESSION['phone'] = $row['phone'];
-      $_SESSION['accountno'] = $row['accountno'];
-      $_SESSION['cardno'] = $row['cardno'];
       $_SESSION['email'] = $row['email'];
 
-      if($row['status'] == 1){
-        header('refresh: 0, ./');
-        $msg = "Login Access Denied! Account has been deactivated.";
-        echo "<script type='text/javascript'>alert('$msg');</script>";
-      }else{
-        header('refresh: 0, ./account/');
-        $msg = "Login Access Granted. You will find your account no. and other account information in your account. WELCOME!";
-        echo "<script type='text/javascript'>alert('$msg');</script>";
-      }
+      header('refresh: 0, ./admin/');
+      $msg = "Login Access Granted. You will find your account no. and other account information in your account. WELCOME!";
+      echo "<script type='text/javascript'>alert('$msg');</script>";
     } else {
-      header('refresh: 0, ./');
+      header('refresh: 0, ./adminlogin/php');
       $msg = "Login Access Denied. Please use the correct credentials";
       echo "<script type='text/javascript'>alert('$msg');</script>";
     }
@@ -46,19 +37,17 @@ if (isset($_POST['login'])) {
   $phone = $_POST['phone'];
   $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-  $users = mysqli_query($con, "SELECT * FROM users WHERE email='$email'");
+  $users = mysqli_query($con, "SELECT * FROM admin WHERE email='$email'");
   $rows = mysqli_num_rows($users);
   if ($rows >= 1) {
     $msg = "This user ALready Exists. Please use a different email to sign Up.";
     echo "<script type='text/javascript'>alert('$msg');</script>";
-    header("refresh: 0, ./");
+    header("refresh: 0, ./adminlogin/php");
   } else {
-    $accno = rand(1000000, 9999999); //OTP generate
-    $cardno = rand(100000000, 999999999);
-    $insert = mysqli_query($con, "INSERT INTO users(fullname, email, phone, accountno, cardno, password) VALUES('$fullname', '$email', '$phone', '$accno', '$cardno', '$password')");
+    $insert = mysqli_query($con, "INSERT INTO admin(fullname, email, phone, password) VALUES('$fullname', '$email', '$phone', '$password')");
     $msg = "Registration Successful! Procced to sign in.";
     echo "<script type='text/javascript'>alert('$msg');</script>";
-    header("refresh: 0, ./");
+    header("refresh: 0, ./adminlogin/php");
   }
 }
 ?>
@@ -80,7 +69,7 @@ if (isset($_POST['login'])) {
         <div class="user_options-unregistered">
           <h2 class="user_unregistered-title">SMART ATM, for you.</h2>
           <p class="user_unregistered-text">SmartATM allows a variety of transactions process and solutions such as deposits, withdrawals, and otp verification for your money safety. Don't have an account?</p>
-          <button class="user_unregistered-signup" id="signup-button">Sign up</button>
+          <!-- <button class="user_unregistered-signup" id="signup-button">Sign up</button> -->
         </div>
 
         <div class="user_options-registered">
@@ -93,7 +82,7 @@ if (isset($_POST['login'])) {
       <div class="user_options-forms" id="user_options-forms">
         <div class="user_forms-login">
           <img src="https://www.pacuniversity.ac.ke/wp-content/uploads/2021/11/New-Logo-800x204.png" height="100%" width="100%" alt="">
-          <h2 class="forms_title">Login</h2>
+          <h2 class="forms_title">Admin Login</h2>
           <form class="forms_form" method="post" action="">
             <fieldset class="forms_fieldset">
               <div class="forms_field">
@@ -104,13 +93,11 @@ if (isset($_POST['login'])) {
               </div>
             </fieldset>
             <div class="forms_buttons">
-              <a href="forget.php" class="forms_buttons-forgot">Forgot password?</a>
-              <a href="adminlogin.php" class="forms_buttons-forgot">Admin only</a>
               <input type="submit" value="Log In" name="login" class="forms_buttons-action">
             </div>
           </form>
         </div>
-        <div class="user_forms-signup">
+        <!-- <div class="user_forms-signup">
         <img src="https://www.pacuniversity.ac.ke/wp-content/uploads/2021/11/New-Logo-800x204.png" height="100%" width="100%" alt="">
           <h2 class="forms_title">Sign Up</h2>
           <form class="forms_form" method="POST" action="">
@@ -132,7 +119,7 @@ if (isset($_POST['login'])) {
               <input type="submit" value="Sign up" name="Register" class="forms_buttons-action">
             </div>
           </form>
-        </div>
+        </div> -->
       </div>
     </div>
   </section>
