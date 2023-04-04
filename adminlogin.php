@@ -16,12 +16,12 @@ if (isset($_POST['login'])) {
       $_SESSION['fullname'] = $row['fullname'];
       $_SESSION['email'] = $row['email'];
 
-      header('refresh: 0, ./admin/');
-      $msg = "Login Access Granted. You will find your account no. and other account information in your account. WELCOME!";
+      header('refresh: 0, ./admin/?p=Dashboard');
+      $msg = "Admin Login Access Granted. WELCOME!";
       echo "<script type='text/javascript'>alert('$msg');</script>";
     } else {
       header('refresh: 0, ./adminlogin.php');
-      $msg = "Login Access Denied. Please use the correct credentials";
+      $msg = "Admin Login Access Denied. Please use the correct credentials";
       echo "<script type='text/javascript'>alert('$msg');</script>";
     }
   } else {
@@ -34,7 +34,6 @@ if (isset($_POST['login'])) {
 
   $fullname = $_POST['fullname'];
   $email = $_POST['email'];
-  $phone = $_POST['phone'];
   $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
   $users = mysqli_query($con, "SELECT * FROM admin WHERE email='$email'");
@@ -42,12 +41,12 @@ if (isset($_POST['login'])) {
   if ($rows >= 1) {
     $msg = "This user ALready Exists. Please use a different email to sign Up.";
     echo "<script type='text/javascript'>alert('$msg');</script>";
-    header("refresh: 0, ./adminlogin/php");
+    header("refresh: 0, ./adminlogin.php");
   } else {
-    $insert = mysqli_query($con, "INSERT INTO admin(fullname, email, phone, password) VALUES('$fullname', '$email', '$phone', '$password')");
-    $msg = "Registration Successful! Procced to sign in.";
+    $insert = mysqli_query($con, "INSERT INTO admin(fullname, email, password) VALUES('$fullname', '$email', '$password')");
+    $msg = "Admin Registration Successful! Procced to sign in.";
     echo "<script type='text/javascript'>alert('$msg');</script>";
-    header("refresh: 0, ./adminlogin/php");
+    header("refresh: 0, ./adminlogin.php");
   }
 }
 ?>
@@ -69,7 +68,7 @@ if (isset($_POST['login'])) {
         <div class="user_options-unregistered">
           <h2 class="user_unregistered-title">SMART ATM, for you.</h2>
           <p class="user_unregistered-text">SmartATM allows a variety of transactions process and solutions such as deposits, withdrawals, and otp verification for your money safety. Don't have an account?</p>
-          <!-- <button class="user_unregistered-signup" id="signup-button">Sign up</button> -->
+          <button class="user_unregistered-signup" id="signup-button">Sign up</button>
         </div>
 
         <div class="user_options-registered">
@@ -81,9 +80,9 @@ if (isset($_POST['login'])) {
 
       <div class="user_options-forms" id="user_options-forms">
         <div class="user_forms-login">
-          <img src="https://www.pacuniversity.ac.ke/wp-content/uploads/2021/11/New-Logo-800x204.png" height="100%" width="100%" alt="">
-          <h2 class="forms_title">Admin Login</h2>
-          <form class="forms_form" method="post" action="">
+        <img src="logo.png" height="100px" width="150px" alt="">
+          <h2 class="forms_title" style="margin-left: 25px;">Admin Login</h2>
+          <form class="forms_form" method="post" action=""  style="margin-left: 25px;">
             <fieldset class="forms_fieldset">
               <div class="forms_field">
                 <input type="email" placeholder="Email" name="email" class="forms_field-input" required autofocus />
@@ -97,19 +96,16 @@ if (isset($_POST['login'])) {
             </div>
           </form>
         </div>
-        <!-- <div class="user_forms-signup">
-        <img src="https://www.pacuniversity.ac.ke/wp-content/uploads/2021/11/New-Logo-800x204.png" height="100%" width="100%" alt="">
-          <h2 class="forms_title">Sign Up</h2>
-          <form class="forms_form" method="POST" action="">
+        <div class="user_forms-signup">
+        <img src="logo.png" height="100px" width="150px" alt="">
+          <h2 class="forms_title" style="margin-left: 25px;">Admin Sign Up</h2>
+          <form class="forms_form" method="POST" action=""  style="margin-left: 25px;">
             <fieldset class="forms_fieldset">
               <div class="forms_field">
                 <input type="text" placeholder="Full Name" name="fullname" class="forms_field-input" required />
               </div>
               <div class="forms_field">
                 <input type="email" placeholder="Email" name="email" class="forms_field-input" required />
-              </div>
-              <div class="forms_field">
-                <input type="tel" placeholder="Phone" name="phone" class="forms_field-input" required />
               </div>
               <div class="forms_field">
                 <input type="password" placeholder="Password" name="password" class="forms_field-input" required />
@@ -119,7 +115,7 @@ if (isset($_POST['login'])) {
               <input type="submit" value="Sign up" name="Register" class="forms_buttons-action">
             </div>
           </form>
-        </div> -->
+        </div>
       </div>
     </div>
   </section>

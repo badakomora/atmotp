@@ -16,7 +16,6 @@ if (isset($_POST['updatepass'])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -36,8 +35,8 @@ if (isset($_POST['updatepass'])) {
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <!-- Brand -->
-                <a class="navbar-brand py-lg-2 mb-lg-5 px-lg-6 me-0 text-underline" href="#">
-                    <!-- <img src="#" alt="..."> --> <b><i>SMART ATM</i></b>
+                <a class="navbar-brand text-underline" href="#">
+                    <!-- <img src="#" alt="..."> -->  <img src="../logo.png" height="100px" width="90px" alt="">
                 </a>
                 <!-- Collapse -->
                 <div class="collapse navbar-collapse" id="sidebarCollapse">
@@ -106,14 +105,13 @@ if (isset($_POST['updatepass'])) {
                                 } else { ?>
                                     <h1 class="h2 mb-0 ls-tigh m-2t">Dashboard</h1>
                                 <?php } ?>
-                                <span class="mt-2">(Admin Area)</span>
                             </div>
                             <!-- Actions -->
                             <div class="col-sm-6 col-12 text-sm-end">
-                                <div class="mx-n1">
-                                <h4>Balance: <span style="background-color:grey;color:white;border-radius:5px;padding:5px;"> KES <?php
+                                <div class="mx-n1 d-flex">
+                                <h4>(Admin Area) Total Balance: <span style="background-color:grey;color:white;border-radius:5px;padding:5px;"> KES <?php
                                                                                                                                     include '../config.php';
-                                                                                                                                    $query = mysqli_query($con, "SELECT * FROM bal");
+                                                                                                                                    $query = mysqli_query($con, "SELECT sum(amount) as amount FROM bal");
                                                                                                                                     $row = mysqli_fetch_assoc($query);
                                                                                                                                     $balance = $row['amount'];
                                                                                                                                     echo $balance;

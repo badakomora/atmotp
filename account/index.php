@@ -57,8 +57,8 @@ if (isset($_POST['updatepass'])) {
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <!-- Brand -->
-                <a class="navbar-brand py-lg-2 mb-lg-5 px-lg-6 me-0 text-underline" href="#">
-                    <!-- <img src="#" alt="..."> --> <b><i>SMART ATM</i></b> 
+                <a class="navbar-brand text-underline" href="#">
+                    <!-- <img src="#" alt="..."> --> <img src="../logo.png" height="100px" width="90px" alt="">
                 </a>
                 <!-- Collapse -->
                 <div class="collapse navbar-collapse" id="sidebarCollapse">

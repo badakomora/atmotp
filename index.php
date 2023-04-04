@@ -24,7 +24,7 @@ if (isset($_POST['login'])) {
         $msg = "Login Access Denied! Account has been deactivated.";
         echo "<script type='text/javascript'>alert('$msg');</script>";
       }else{
-        header('refresh: 0, ./account/');
+        header('refresh: 0, ./account/?p=Dashboard');
         $msg = "Login Access Granted. You will find your account no. and other account information in your account. WELCOME!";
         echo "<script type='text/javascript'>alert('$msg');</script>";
       }
@@ -79,22 +79,22 @@ if (isset($_POST['login'])) {
       <div class="user_options-text">
         <div class="user_options-unregistered">
           <h2 class="user_unregistered-title">SMART ATM, for you.</h2>
-          <p class="user_unregistered-text">SmartATM allows a variety of transactions process and solutions such as deposits, withdrawals, and otp verification for your money safety. Don't have an account?</p>
+          <p class="user_unregistered-text">SmartATM allows a variety of transactions process and solutions such as deposits, withdrawals, and otp verification for your money safety. Check our <a href="" style="color:whitesmoke">About Section here</a> to learn more.</p>
           <button class="user_unregistered-signup" id="signup-button">Sign up</button>
         </div>
 
         <div class="user_options-registered">
           <h2 class="user_registered-title">Choose SMART ATM.</h2>
-          <p class="user_registered-text">SmartATM is the place to be. Create your account for free and have your mobile money secure. Have an account?</p>
+          <p class="user_registered-text">SmartATM is the place to be. Create your account for free and have your mobile money secure.  Check our <a href="" style="color:whitesmoke">About Section here</a> to learn more.</p>
           <button class="user_registered-login" id="login-button">Login</button>
         </div>
       </div>
 
       <div class="user_options-forms" id="user_options-forms">
         <div class="user_forms-login">
-          <img src="https://www.pacuniversity.ac.ke/wp-content/uploads/2021/11/New-Logo-800x204.png" height="100%" width="100%" alt="">
-          <h2 class="forms_title">Login</h2>
-          <form class="forms_form" method="post" action="">
+          <img src="logo.png" height="100px" width="150px" alt="">
+          <h2 class="forms_title" style="margin-left: 25px;">Login</h2>
+          <form class="forms_form" method="post" action="" style="margin-left: 25px;">
             <fieldset class="forms_fieldset">
               <div class="forms_field">
                 <input type="email" placeholder="Email" name="email" class="forms_field-input" required autofocus />
@@ -104,16 +104,16 @@ if (isset($_POST['login'])) {
               </div>
             </fieldset>
             <div class="forms_buttons">
-              <a href="forget.php" class="forms_buttons-forgot">Forgot password?</a>
-              <a href="adminlogin.php" class="forms_buttons-forgot">Admin only</a>
+              <a href="forget.php" style="color:black;" class="forms_buttons-forgot">Forgot password?</a>
+              <a href="adminlogin.php" style="color:black;" class="forms_buttons-forgot">Admin only</a>
               <input type="submit" value="Log In" name="login" class="forms_buttons-action">
             </div>
           </form>
         </div>
         <div class="user_forms-signup">
-        <img src="https://www.pacuniversity.ac.ke/wp-content/uploads/2021/11/New-Logo-800x204.png" height="100%" width="100%" alt="">
-          <h2 class="forms_title">Sign Up</h2>
-          <form class="forms_form" method="POST" action="">
+        <img src="logo.png" height="100px" width="150px" alt="">
+          <h2 class="forms_title" style="margin-left:25px;">Sign Up</h2>
+          <form class="forms_form" method="POST" action="" style="margin-left:25px;">
             <fieldset class="forms_fieldset">
               <div class="forms_field">
                 <input type="text" placeholder="Full Name" name="fullname" class="forms_field-input" required />
