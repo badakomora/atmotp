@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 31, 2023 at 10:27 AM
+-- Generation Time: Apr 04, 2023 at 03:51 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -39,7 +39,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `fullname`, `email`, `password`) VALUES
-(1, 'Administrator', 'admin@smartatm.com', '$2y$10$H6HjaYgTBCcj71Gkq6apF.wGraJPFVF.LHquJ1n4RbWA2N7IRhdEq');
+(2, 'Michael Amakobe', 'Michaelamakobe@smartatm.com', '$2y$10$xJjfjBFTZ9K1RxU88EIXbudUVxkDY7E40gWBX8jBWCzZkFa5dELRa');
 
 -- --------------------------------------------------------
 
@@ -52,13 +52,6 @@ CREATE TABLE `bal` (
   `user_id` int(11) NOT NULL,
   `amount` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `bal`
---
-
-INSERT INTO `bal` (`id`, `user_id`, `amount`) VALUES
-(8, 26, 900);
 
 -- --------------------------------------------------------
 
@@ -74,13 +67,6 @@ CREATE TABLE `deposits` (
   `transaction` varchar(50) NOT NULL DEFAULT 'Deposit'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `deposits`
---
-
-INSERT INTO `deposits` (`id`, `user_id`, `amount`, `deposit_time`, `transaction`) VALUES
-(27, 26, 1000, '2023-03-31 06:56:06', 'Deposit');
-
 -- --------------------------------------------------------
 
 --
@@ -94,17 +80,9 @@ CREATE TABLE `users` (
   `phone` varchar(50) NOT NULL,
   `accountno` int(9) NOT NULL,
   `cardno` int(16) NOT NULL,
-  `status` int(11) NOT NULL DEFAULT 1,
+  `status` int(11) NOT NULL DEFAULT 0,
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `fullname`, `email`, `phone`, `accountno`, `cardno`, `status`, `password`) VALUES
-(26, 'Andrew Bada', 'badakomora06@gmail.com', '0768438291', 8935665, 502246880, 0, '$2y$10$TsDsE6kUfLhjzc4xNYzaUe7JJEQm5Ocj.BRVs/MG53yM3j2ZLccIq'),
-(27, 'bada komora', 'badakomora42@gmail.com', '0759621394', 9924037, 538223135, 0, '$2y$10$jfoitNFVVR1JBENEcptjcOBxbGzZIXzhUpEX5Neje4/medyaGW6OO');
 
 -- --------------------------------------------------------
 
@@ -119,13 +97,6 @@ CREATE TABLE `withdrawals` (
   `withdrawal_time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `transaction` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `withdrawals`
---
-
-INSERT INTO `withdrawals` (`id`, `user_id`, `amount`, `withdrawal_time`, `transaction`) VALUES
-(5, 26, 100, '2023-03-31 08:22:09', 'Withdrawal');
 
 --
 -- Indexes for dumped tables
@@ -169,31 +140,31 @@ ALTER TABLE `withdrawals`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `bal`
 --
 ALTER TABLE `bal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `deposits`
 --
 ALTER TABLE `deposits`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `withdrawals`
 --
 ALTER TABLE `withdrawals`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
