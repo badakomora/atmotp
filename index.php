@@ -79,13 +79,13 @@ if (isset($_POST['login'])) {
       <div class="user_options-text">
         <div class="user_options-unregistered">
           <h2 class="user_unregistered-title">SMART ATM, for you.</h2>
-          <p class="user_unregistered-text">SmartATM allows a variety of transactions process and solutions such as deposits, withdrawals, and otp verification for your money safety. Check our <a href="" style="color:whitesmoke">About Section here</a> to learn more.</p>
+          <p class="user_unregistered-text">SmartATM allows a variety of transactions process and solutions such as deposits, withdrawals, and otp verification for your money safety. Check our <a href="./about.php" style="color:whitesmoke">About Section here</a> to learn more.</p>
           <button class="user_unregistered-signup" id="signup-button">Sign up</button>
         </div>
 
         <div class="user_options-registered">
           <h2 class="user_registered-title">Choose SMART ATM.</h2>
-          <p class="user_registered-text">SmartATM is the place to be. Create your account for free and have your mobile money secure.  Check our <a href="" style="color:whitesmoke">About Section here</a> to learn more.</p>
+          <p class="user_registered-text">SmartATM is the place to be. Create your account for free and have your mobile money secure.  Check our <a href="./about.php" style="color:whitesmoke">About Section here</a> to learn more.</p>
           <button class="user_registered-login" id="login-button">Login</button>
         </div>
       </div>

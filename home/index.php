@@ -9,7 +9,7 @@ if (isset($_POST['withdraw'])) {
   {
     // Set your app credentials
     $username = "sandbox";
-    $apiKey = "059cbffea4bfe7ce1199dc0f20b512b9e2350ee08b18f96872d48394afe29a28";
+    $apiKey = "fb48aaefd42f989ad3071bd25342aca83b97d592cd14cb89331a9371ac0177b0";
     // Initialize the SDK
     $AT = new AfricasTalking($username, $apiKey);
     // Get the SMS service
@@ -52,7 +52,7 @@ if (isset($_POST['withdraw'])) {
   {
     // Set your app credentials
     $username = "sandbox";
-    $apiKey = "059cbffea4bfe7ce1199dc0f20b512b9e2350ee08b18f96872d48394afe29a28";
+    $apiKey = "fb48aaefd42f989ad3071bd25342aca83b97d592cd14cb89331a9371ac0177b0";
     // Initialize the SDK
     $AT = new AfricasTalking($username, $apiKey);
     // Get the SMS service
