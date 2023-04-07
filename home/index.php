@@ -8,8 +8,8 @@ if (isset($_POST['withdraw'])) {
   function withdraw()
   {
     // Set your app credentials
-    $username = "sandbox";
-    $apiKey = "fb48aaefd42f989ad3071bd25342aca83b97d592cd14cb89331a9371ac0177b0";
+    $username = "Amakobe";
+    $apiKey = "3efca63b7391e9fe960b784d9604e7c968a9ed2e96a5ca2d8da096884e38bed3";
     // Initialize the SDK
     $AT = new AfricasTalking($username, $apiKey);
     // Get the SMS service
@@ -23,7 +23,7 @@ if (isset($_POST['withdraw'])) {
     // Set your message
     $message = "This is your otp: " . $otp . ". Do not share your otp.";
     // Set your shortCode or senderId
-    $from = "SmartATM";
+    $from = "AT";
     try {
       // Thats it, hit send and we'll take care of the rest
       $sms->send([
@@ -51,8 +51,8 @@ if (isset($_POST['withdraw'])) {
   function forgetpass()
   {
     // Set your app credentials
-    $username = "sandbox";
-    $apiKey = "fb48aaefd42f989ad3071bd25342aca83b97d592cd14cb89331a9371ac0177b0";
+    $username = "Amakobe";
+    $apiKey = "3efca63b7391e9fe960b784d9604e7c968a9ed2e96a5ca2d8da096884e38bed3";
     // Initialize the SDK
     $AT = new AfricasTalking($username, $apiKey);
     // Get the SMS service
@@ -72,7 +72,7 @@ if (isset($_POST['withdraw'])) {
       // Set your message
       $message = "This is your otp: " . $otp . ". Do not share your otp.";
       // Set your shortCode or senderId
-      $from = "SmartATM";
+      $from = "AT";
       try {
         // Thats it, hit send and we'll take care of the rest
         $sms->send([
