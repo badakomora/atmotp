@@ -171,45 +171,49 @@ body {
     <article class="article">
         <div class="article__body">
             <section class="header">
-                <span class="header__cat">AI & Automation</span>
-                <h1 class="header__title">Lorem ipsum dolor sit amet consectetur.</h1>
+                <span class="header__cat">Smart Atm, For you.</span>
+                <h1 class="header__title">About Us. <br> Introduction to SMART ATM.</h1>
             </section>
     
             <section class="text-block rich-text">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis minus perferendis magnam dignissimos ipsa aut facere, laboriosam voluptatem natus illo deserunt doloremque eligendi temporibus ea alias est beatae! Ex praesentium ad vel consequatur eveniet illum iusto enim reprehenderit assumenda molestias ipsa quis, corporis soluta adipisci nihil.</p>
+                <p>Welcome to our smart ATM system, designed to provide you with a fast, secure, and convenient banking experience. Our smart ATM system is equipped with advanced features to ensure that you have the best possible banking experience.</p>
     
-                <h1>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h1>
+                
+                
+                
+                <h1>Features and Benefits</h1>
     
-                <p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>
+                <p><strong> Our smart ATM system is designed with features that provide our customers with numerous benefits, such as: The ability to deposit cash, Cardless Cash withdrawal and Easy-to-use interface and user-friendly design.</strong></p>
     
-                <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum expedita recusandae aliquam.</h2>
+
+
+
+                <h1>Our Mission</h1>
     
-                <ol>
-                    <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-                    <li>Aliquam tincidunt mauris eu risus.</li>
-                </ol>
+                <p><strong>Our mission is to offer our customers an ATM system that provides fast, secure, and convenient banking services that are accessible at any time. We strive to be the preferred choice for banking solutions that meet the evolving needs of our customers</strong></p>
     
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna. Cras in mi at felis aliquet congue. Ut a est eget ligula molestie gravida. Curabitur massa. Donec eleifend, libero at sagittis mollis, tellus est malesuada tellus, at luctus turpis elit sit amet quam. Vivamus pretium ornare est.</p>
+
+
+
+
+                <h2>Security</h2>
     
-                <h3>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</h3>
+                <p>We take security seriously, and our smart ATM system uses advanced security measures to protect our customers' transactions. To ensure the safety of your banking transactions, we use a One-Time Password (OTP) system. This feature adds an extra layer of security to your banking transactions, making sure that your financial data and transactions are protected.</p>
     
-                <ul>
-                    <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-                    <li>Aliquam tincidunt mauris eu risus.</li>
-                </ul>
+                
+                
+                
+                <h3>Contact Us.</h3>
     
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna. Cras in mi at felis aliquet congue. Ut a est eget ligula molestie gravida.</p>
+                <p>If you have any questions or require assistance with our smart ATM system, our customer support team is available 24/7. Please feel free to contact us via phone at 0706002813, email at michaelamakobe@smartatm.com. Our knowledgeable and friendly staff are always ready to help you with any questions or concerns you may have.</p>
             </section>
         </div>
     
         <div class="article__image">
             <div class="article__image-wrapper">
-                <img src="https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80" alt="">
+                <img src="https://assets.publishing.service.gov.uk/media/62f63e80d3bf7f4c60109c7d/bank-service-quality-indicators-august-2022.jfif" alt="">
             </div>
         </div>
     </article>
-    <a href="#" class="article__end">
-        <p class="article__end-text">Next article</p>
-    </a>
 </body>
 </html>
