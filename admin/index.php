@@ -16,6 +16,7 @@ if (isset($_POST['updatepass'])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -36,7 +37,7 @@ if (isset($_POST['updatepass'])) {
                 </button>
                 <!-- Brand -->
                 <a class="navbar-brand text-underline" href="#">
-                    <!-- <img src="#" alt="..."> -->  <img src="../logo.png" height="100px" width="90px" alt="">
+                    <!-- <img src="#" alt="..."> --> <img src="../logo.png" height="100px" width="90px" alt="">
                 </a>
                 <!-- Collapse -->
                 <div class="collapse navbar-collapse" id="sidebarCollapse">
@@ -49,35 +50,35 @@ if (isset($_POST['updatepass'])) {
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="./?p=withdrawals">
-                            <i class="bi bi-cash"></i>Withdrawals
+                                <i class="bi bi-cash"></i>Withdrawals
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="./?p=Deposits">
-                            <i class="bi bi-cash"></i>Deposits
+                                <i class="bi bi-cash"></i>Deposits
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="./?p=Users">
-                            <i class="bi bi-person-square""></i>Users
+                                <i class="bi bi-person-square""></i>Users
                             </a>
                         </li>
                     </ul>
                     <!-- Divider -->
-                    <hr class="navbar-divider my-5 opacity-20">
-                    <!-- Navigation -->
-                    <div class="mt-auto"></div>
-                    <!-- User (md) -->
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" class="dropdown-item" type="button" data-toggle="modal" data-target="#account">
-                                <i class="bi bi-person-square"></i> Account
-                            </a>
-                        </li>
-                        <a class="nav-link" href="../logout.php">
-                            <i class="bi bi-box-arrow-left"></i> Logout
-                        </a>
+                    <hr class=" navbar-divider my-5 opacity-20">
+                                    <!-- Navigation -->
+                                    <div class="mt-auto"></div>
+                                    <!-- User (md) -->
+                                    <ul class="navbar-nav">
+                                        <li class="nav-item">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#" class="dropdown-item" type="button" data-toggle="modal" data-target="#account">
+                                                <i class="bi bi-person-square"></i> Account
+                                            </a>
+                                        </li>
+                                        <a class="nav-link" href="../logout.php">
+                                            <i class="bi bi-box-arrow-left"></i> Logout
+                                        </a>
                         </li>
                     </ul>
                 </div>
@@ -109,13 +110,13 @@ if (isset($_POST['updatepass'])) {
                             <!-- Actions -->
                             <div class="col-sm-6 col-12 text-sm-end">
                                 <div class="mx-n1 d-flex">
-                                <h4>(Admin Area) Total Balance: <span style="background-color:grey;color:white;border-radius:5px;padding:5px;"> KES <?php
-                                                                                                                                    include '../config.php';
-                                                                                                                                    $query = mysqli_query($con, "SELECT sum(amount) as amount FROM bal");
-                                                                                                                                    $row = mysqli_fetch_assoc($query);
-                                                                                                                                    $balance = $row['amount'];
-                                                                                                                                    echo $balance;
-                                                                                                                                    ?></span></h4>
+                                    <h4>(Admin Area) Total Balance: <span style="background-color:grey;color:white;border-radius:5px;padding:5px;"> KES <?php
+                                                                                                                                                        include '../config.php';
+                                                                                                                                                        $query = mysqli_query($con, "SELECT sum(amount) as amount FROM bal");
+                                                                                                                                                        $row = mysqli_fetch_assoc($query);
+                                                                                                                                                        $balance = $row['amount'];
+                                                                                                                                                        echo $balance;
+                                                                                                                                                        ?></span></h4>
                                 </div>
                             </div>
                         </div>
@@ -125,7 +126,7 @@ if (isset($_POST['updatepass'])) {
                                 <a href="./?all=<?php echo $_GET['p']; ?>" class="nav-link active">All</a>
                             </li>
                             <li class="nav-item ">
-                                
+
                             </li>
                         </ul>
                     </div>
@@ -152,7 +153,7 @@ if (isset($_POST['updatepass'])) {
                                         </div>
                                         <div class="col-auto">
                                             <div class="icon icon-shape bg-tertiary text-white text-lg rounded-circle">
-                                            <i class="bi bi-cash"></i>
+                                                <i class="bi bi-cash"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -178,7 +179,7 @@ if (isset($_POST['updatepass'])) {
                                         </div>
                                         <div class="col-auto">
                                             <div class="icon icon-shape bg-primary text-white text-lg rounded-circle">
-                                            <i class="bi bi-cash"></i>
+                                                <i class="bi bi-cash"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -204,7 +205,7 @@ if (isset($_POST['updatepass'])) {
                                         </div>
                                         <div class="col-auto">
                                             <div class="icon icon-shape bg-success text-white text-lg rounded-circle">
-                                            <i class="bi bi-people"></i>
+                                                <i class="bi bi-people"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -222,42 +223,42 @@ if (isset($_POST['updatepass'])) {
 
                     <!-- account Modal -->
                     <div class="modal fade" id="account" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Admin Information</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <form action="" method="post">
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label for="" class="">Email</label>
-                                <input type="text" disabled value="<?php echo $_SESSION['email']; ?>" class="form-control" maxlength="100"/>
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Admin Information</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <form action="" method="post">
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label for="" class="">Email</label>
+                                            <input type="text" disabled value="<?php echo $_SESSION['email']; ?>" class="form-control" maxlength="100" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="" class="">Staff</label>
+                                            <input type="text" disabled value="<?php echo $_SESSION['fullname']; ?>" class="form-control" maxlength="100" />
+                                        </div>
+                                        <hr>
+                                        <div class="form-group">
+                                            <label for="" class="">Update Password</label>
+                                            <input type="text" name="password" class="form-control" maxlength="100" / required>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button class="btn btn-primary" type="submit" name="updatepass">Update</button>
+                                    </div>
+                                </form>
                             </div>
-                            <div class="form-group">
-                                <label for="" class="">Staff</label>
-                                <input type="text" disabled value="<?php echo $_SESSION['fullname']; ?>" class="form-control" maxlength="100"/>
-                            </div>
-                            <hr>
-                            <div class="form-group">
-                                <label for="" class="">Update Password</label>
-                                <input type="text" name="password" class="form-control" maxlength="100"/ required>
-                            </div>
-                        </div>
-                            <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button class="btn btn-primary" type="submit" name="updatepass">Update</button>
-                            </div>
-                        </form>
                         </div>
                     </div>
-                    </div>
 
 
 
-                    
+
 
 
 
@@ -269,7 +270,7 @@ if (isset($_POST['updatepass'])) {
                                 <h5 class="mb-0">Withdrawals</h5>
                             <?php } elseif (isset($_GET['p']) and $_GET['p'] == 'Deposits') { ?>
                                 <h5 class="mb-0">Deposits</h5>
-                            <?php }elseif(isset($_GET['p']) and $_GET['p'] == 'Users') {?>
+                            <?php } elseif (isset($_GET['p']) and $_GET['p'] == 'Users') { ?>
                                 <h5 class="mb-0">Users</h5>
                             <?php } else { ?>
                                 <h5 class="mb-0">Dashboard</h5>
@@ -279,23 +280,23 @@ if (isset($_POST['updatepass'])) {
                         <div class="table-responsive">
                             <table class="table table-hover table-nowrap">
                                 <thead class="thead-light">
-                                    <?php if(isset($_GET['p']) and $_GET['p'] == 'Users') {?>
-                                    <tr>
-                                        <th scope="col">Full Name</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Phone No.</th>
-                                        <th scope="col">Account No.</th>
-                                        <th scope="col">Card No.</th>
-                                        <th scope="col">Action</th>
-                                    </tr>
-                                    <?php }else{?>
-                                    <tr>
-                                        <th scope="col">phone</th>
-                                        <th scope="col">Amount</th>
-                                        <th scope="col">Date of transaction</th>
-                                        <th scope="col">Type of transaction</th>
-                                    </tr>
-                                    <?php }?>
+                                    <?php if (isset($_GET['p']) and $_GET['p'] == 'Users') { ?>
+                                        <tr>
+                                            <th scope="col">Full Name</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Phone No.</th>
+                                            <th scope="col">Account No.</th>
+                                            <th scope="col">Card No.</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    <?php } else { ?>
+                                        <tr>
+                                            <th scope="col">phone</th>
+                                            <th scope="col">Amount</th>
+                                            <th scope="col">Date of transaction</th>
+                                            <th scope="col">Type of transaction</th>
+                                        </tr>
+                                    <?php } ?>
                                 </thead>
                                 <tbody>
 
@@ -356,43 +357,43 @@ if (isset($_POST['updatepass'])) {
 
 
 
-<!-- user Modal -->
-<div class="modal fade" id="user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">User information</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <form action="" method="post">
-                        <div class="modal-body">
-                        <div class="form-group">
-                                <label for="" class="">Full Name</label>
-                                <input type="text" disabled value=" <?php echo $bookingsrows['fullname']; ?>" class="form-control" maxlength="100"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="" class="">Email</label>
-                                <input type="text" disabled value=" <?php echo $bookingsrows['email']; ?>" class="form-control" maxlength="100"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="" class="">Account No.</label>
-                                <input type="text" disabled value=" <?php echo $bookingsrows['accountno']; ?>" class="form-control" maxlength="100"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="" class="">Card No.</label>
-                                <input type="text" disabled value="<?php echo $bookingsrows['cardno']; ?>" class="form-control" maxlength="100"/>
-                            </div>
-                            <br>
-                            <hr>
-                        </div>
-                            <div class="modal-footer">
-                           </div>
-                        </form>
-                        </div>
-                    </div>
-                    </div>
+                                            <!-- user Modal -->
+                                            <div class="modal fade" id="user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">User information</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <form action="" method="post">
+                                                            <div class="modal-body">
+                                                                <div class="form-group">
+                                                                    <label for="" class="">Full Name</label>
+                                                                    <input type="text" disabled value=" <?php echo $bookingsrows['fullname']; ?>" class="form-control" maxlength="100" />
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="" class="">Email</label>
+                                                                    <input type="text" disabled value=" <?php echo $bookingsrows['email']; ?>" class="form-control" maxlength="100" />
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="" class="">Account No.</label>
+                                                                    <input type="text" disabled value=" <?php echo $bookingsrows['accountno']; ?>" class="form-control" maxlength="100" />
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="" class="">Card No.</label>
+                                                                    <input type="text" disabled value="<?php echo $bookingsrows['cardno']; ?>" class="form-control" maxlength="100" />
+                                                                </div>
+                                                                <br>
+                                                                <hr>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
 
 
 
@@ -457,42 +458,42 @@ if (isset($_POST['updatepass'])) {
 
 
                                             <!-- user Modal -->
-<div class="modal fade" id="user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">User information</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <form action="" method="post">
-                        <div class="modal-body">
-                        <div class="form-group">
-                                <label for="" class="">Full Name</label>
-                                <input type="text" disabled value=" <?php echo $bookingsrows['fullname']; ?>" class="form-control" maxlength="100"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="" class="">Email</label>
-                                <input type="text" disabled value=" <?php echo $bookingsrows['email']; ?>" class="form-control" maxlength="100"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="" class="">Account No.</label>
-                                <input type="text" disabled value=" <?php echo $bookingsrows['accountno']; ?>" class="form-control" maxlength="100"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="" class="">Card No.</label>
-                                <input type="text" disabled value="<?php echo $bookingsrows['cardno']; ?>" class="form-control" maxlength="100"/>
-                            </div>
-                            <br>
-                            <hr>
-                        </div>
-                            <div class="modal-footer">
-                           </div>
-                        </form>
-                        </div>
-                    </div>
-                    </div>
+                                            <div class="modal fade" id="user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">User information</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <form action="" method="post">
+                                                            <div class="modal-body">
+                                                                <div class="form-group">
+                                                                    <label for="" class="">Full Name</label>
+                                                                    <input type="text" disabled value=" <?php echo $bookingsrows['fullname']; ?>" class="form-control" maxlength="100" />
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="" class="">Email</label>
+                                                                    <input type="text" disabled value=" <?php echo $bookingsrows['email']; ?>" class="form-control" maxlength="100" />
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="" class="">Account No.</label>
+                                                                    <input type="text" disabled value=" <?php echo $bookingsrows['accountno']; ?>" class="form-control" maxlength="100" />
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="" class="">Card No.</label>
+                                                                    <input type="text" disabled value="<?php echo $bookingsrows['cardno']; ?>" class="form-control" maxlength="100" />
+                                                                </div>
+                                                                <br>
+                                                                <hr>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
 
 
 
@@ -554,46 +555,46 @@ if (isset($_POST['updatepass'])) {
                                             </tr>
 
 
-                    <!-- user Modal -->
-                    <div class="modal fade" id="user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">User information</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <form action="" method="post">
-                        <div class="modal-body">
-                        <div class="form-group">
-                                <label for="" class="">Full Name</label>
-                                <input type="text" disabled value=" <?php echo $bookingsrows['fullname']; ?>" class="form-control" maxlength="100"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="" class="">Email</label>
-                                <input type="text" disabled value=" <?php echo $bookingsrows['email']; ?>" class="form-control" maxlength="100"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="" class="">Account No.</label>
-                                <input type="text" disabled value=" <?php echo $bookingsrows['accountno']; ?>" class="form-control" maxlength="100"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="" class="">Card No.</label>
-                                <input type="text" disabled value="<?php echo $bookingsrows['cardno']; ?>" class="form-control" maxlength="100"/>
-                            </div>
-                            <br>
-                            <hr>
-                        </div>
-                            <div class="modal-footer">
-                           </div>
-                        </form>
-                        </div>
-                    </div>
-                    </div>
+                                            <!-- user Modal -->
+                                            <div class="modal fade" id="user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">User information</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <form action="" method="post">
+                                                            <div class="modal-body">
+                                                                <div class="form-group">
+                                                                    <label for="" class="">Full Name</label>
+                                                                    <input type="text" disabled value=" <?php echo $bookingsrows['fullname']; ?>" class="form-control" maxlength="100" />
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="" class="">Email</label>
+                                                                    <input type="text" disabled value=" <?php echo $bookingsrows['email']; ?>" class="form-control" maxlength="100" />
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="" class="">Account No.</label>
+                                                                    <input type="text" disabled value=" <?php echo $bookingsrows['accountno']; ?>" class="form-control" maxlength="100" />
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="" class="">Card No.</label>
+                                                                    <input type="text" disabled value="<?php echo $bookingsrows['cardno']; ?>" class="form-control" maxlength="100" />
+                                                                </div>
+                                                                <br>
+                                                                <hr>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
 
 
-                                            <?php  }
+                                        <?php  }
                                     } elseif (isset($_GET['p']) and $_GET['p'] == 'Users') {
 
                                         include '../config.php';
@@ -610,58 +611,58 @@ if (isset($_POST['updatepass'])) {
 
 
 
-                                        <tr>
-                                        <td>
-                                            <i class="bi bi-user-square"></i>
-                                            <a class="text-heading font-semibold" href="#">
-                                                <?php echo $bookingsrows['fullname']; ?>.
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <i class="bi bi-envelope"></i>
-                                            <a class="text-heading font-semibold" href="#">
-                                                <?php echo $bookingsrows['email']; ?>.
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <i class="bi bi-person"></i>
-                                            <a class="text-heading font-semibold" href="#">
-                                                <?php echo $bookingsrows['phone']; ?>
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <i class="bi bi-card-checklist"></i>
-                                            <a class="text-heading font-semibold" href="#">
-                                                <?php echo $bookingsrows['accountno']; ?>
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <i class="bi bi-card-checklist"></i>
-                                            <a class="text-heading font-semibold" href="#">
-                                                <?php echo $bookingsrows['cardno']; ?>.
-                                            </a>
-                                        </td>
+                                            <tr>
+                                                <td>
+                                                    <i class="bi bi-user-square"></i>
+                                                    <a class="text-heading font-semibold" href="#">
+                                                        <?php echo $bookingsrows['fullname']; ?>.
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <i class="bi bi-envelope"></i>
+                                                    <a class="text-heading font-semibold" href="#">
+                                                        <?php echo $bookingsrows['email']; ?>.
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <i class="bi bi-person"></i>
+                                                    <a class="text-heading font-semibold" href="#">
+                                                        <?php echo $bookingsrows['phone']; ?>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <i class="bi bi-card-checklist"></i>
+                                                    <a class="text-heading font-semibold" href="#">
+                                                        <?php echo $bookingsrows['accountno']; ?>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <i class="bi bi-card-checklist"></i>
+                                                    <a class="text-heading font-semibold" href="#">
+                                                        <?php echo $bookingsrows['cardno']; ?>.
+                                                    </a>
+                                                </td>
                                                 <td class="text-end">
-                                                    <?php if($bookingsrows['status'] == 1){?>
-                                                      <a href="action.php?deactivate=<?php echo $bookingsrows['id']; ?>&status=0" class="btn btn-sm btn-success">Activate Account</a>
-                                                    <?php }else{?>
-                                                        <a href="action.php?deactivate=<?php echo $bookingsrows['id']; ?>&status=1" class="btn btn-sm btn-warning">Deactivate Account</a>                                                    
-                                                    <?php }?>
-                                                      <button type="button" onclick="delete<?php echo $bookingsrows['id']; ?>();" class="btn btn-sm btn-square btn-danger text-danger-hover">
-                                                            <i class="bi bi-trash"></i>
-                                                      </button>
-                                                        <script>
-                                                            function delete<?php echo $bookingsrows['id']; ?>() {
-                                                                var action = window.confirm("Are you sure you want to delete <?php echo $bookingsrows['email']; ?>?");
-                                                                if (action) {
-                                                                    document.location.href = 'action.php?delete=<?php echo $bookingsrows['id']; ?>';
-                                                                } else {
-                                                                    document.location.href = './?p=Users';
-                                                                }
+                                                    <?php if ($bookingsrows['status'] == 1) { ?>
+                                                        <a href="action.php?deactivate=<?php echo $bookingsrows['id']; ?>&status=0" class="btn btn-sm btn-success">Activate Account</a>
+                                                    <?php } else { ?>
+                                                        <a href="action.php?deactivate=<?php echo $bookingsrows['id']; ?>&status=1" class="btn btn-sm btn-warning">Deactivate Account</a>
+                                                    <?php } ?>
+                                                    <button type="button" onclick="delete<?php echo $bookingsrows['id']; ?>();" class="btn btn-sm btn-square btn-danger text-danger-hover">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                    <script>
+                                                        function delete<?php echo $bookingsrows['id']; ?>() {
+                                                            var action = window.confirm("Are you sure you want to delete <?php echo $bookingsrows['email']; ?>?");
+                                                            if (action) {
+                                                                document.location.href = 'action.php?delete=<?php echo $bookingsrows['id']; ?>';
+                                                            } else {
+                                                                document.location.href = './?p=Users';
                                                             }
-                                                        </script>
-                                                    </td>
-                                    </tr>
+                                                        }
+                                                    </script>
+                                                </td>
+                                            </tr>
 
 
 
@@ -669,7 +670,7 @@ if (isset($_POST['updatepass'])) {
 
 
 
-                                        
+
 
 
 
