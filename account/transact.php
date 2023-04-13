@@ -80,9 +80,17 @@
       </div>
       <form action="" method="post">
         <div class="modal-body">
+        <div class="form-group">
+            <label for="" class="">Full Name</label>
+            <input type="text" disabled value="<?php echo $_SESSION['fullname']; ?>" class="form-control" maxlength="100" />
+          </div>
           <div class="form-group">
             <label for="" class="">Email</label>
             <input type="text" disabled value="<?php echo $_SESSION['email']; ?>" class="form-control" maxlength="100" />
+          </div>
+          <div class="form-group">
+            <label for="" class="">Phone</label>
+            <input type="text" disabled value="<?php echo $_SESSION['phone']; ?>" class="form-control" maxlength="100" />
           </div>
           <div class="form-group">
             <label for="" class="">Account No.</label>
